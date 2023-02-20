@@ -14,31 +14,31 @@ import kotlinx.coroutines.launch
 
 class SplashFragment : Fragment() {
 
-	private lateinit var binding: FragmentSplashBinding
+    private lateinit var binding: FragmentSplashBinding
 
-	override fun onCreateView(
-		inflater: LayoutInflater, container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View {
-		val mainView = inflater.inflate(R.layout.fragment_splash, container, false)
-		binding = FragmentSplashBinding.bind(mainView)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val mainView = inflater.inflate(R.layout.fragment_splash, container, false)
+        binding = FragmentSplashBinding.bind(mainView)
 
-		lifecycleScope.launch {
-			delay(1000)
-			//navigateToLoginFragment()
-			navigateToScheduleFragment()
-		}
+        lifecycleScope.launch {
+            delay(1000)
+            navigateToLoginFragment()
+            //navigateToScheduleFragment()
+        }
 
-		return binding.root
-	}
+        return binding.root
+    }
 
-	private fun navigateToLoginFragment() {
-		findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
-	}
+    private fun navigateToLoginFragment() {
+        findNavController().navigate(R.id.action_splashFragment_to_loginFragment)
+    }
 
-	private fun navigateToScheduleFragment() {
-		findNavController().navigate(R.id.action_splashFragment_to_scheduleFragment)
-	}
+    private fun navigateToScheduleFragment() {
+        findNavController().navigate(R.id.action_splashFragment_to_scheduleFragment)
+    }
 
 
 }

@@ -10,16 +10,17 @@ import com.example.sheduleproject.databinding.FragmentSheduleBinding
 
 class ScheduleFragment : Fragment() {
 
-	private lateinit var binding: FragmentSheduleBinding
+    private lateinit var binding: FragmentSheduleBinding
 
-	override fun onCreateView(
-		inflater: LayoutInflater, container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View {
-		val mainView = inflater.inflate(R.layout.fragment_shedule, container, false)
-		binding = FragmentSheduleBinding.bind(mainView)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val mainView = inflater.inflate(R.layout.fragment_shedule, container, false)
+        binding = FragmentSheduleBinding.bind(mainView)
 
-		return binding.root
-	}
+
+        return binding.root
+    }
 
 }
