@@ -1,5 +1,10 @@
 <resources>
 	<string name="app_name">OutOfTime</string>
 	<string name="logo_tsu_description">this is a tsu logo</string>
+
+	<string name="login">login</string>
+	<string name="registration">registration</string>
+
+	<string name="schedule">schedule</string>
 	<string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
