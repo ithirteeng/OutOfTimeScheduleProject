@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.sheduleproject.R
 import com.example.sheduleproject.databinding.FragmentRegistrationBinding
 
@@ -20,6 +21,14 @@ class RegistrationFragment : Fragment() {
 		binding = FragmentRegistrationBinding.bind(mainView)
 
 		return binding.root
+	}
+
+	private fun navigateToScheduleFragment() {
+		findNavController().navigate(R.id.action_registrationFragment_to_scheduleFragment)
+	}
+
+	private fun navigateToLoginFragment() {
+		findNavController().navigate(R.id.action_registrationFragment_to_loginFragment)
 	}
 
 }
