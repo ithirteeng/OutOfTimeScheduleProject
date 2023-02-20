@@ -32,7 +32,7 @@
 		<action
 			android:id="@+id/action_loginFragment_to_scheduleFragment"
 			app:destination="@id/scheduleFragment"
-			app:popUpTo="@id/loginFragment"
+			app:popUpTo="@id/splashFragment"
 			app:popUpToInclusive="true" />
 	</fragment>
 	<fragment
@@ -46,7 +46,7 @@
 		<action
 			android:id="@+id/action_registrationFragment_to_scheduleFragment"
 			app:destination="@id/scheduleFragment"
-			app:popUpTo="@id/loginFragment"
+			app:popUpTo="@id/splashFragment"
 			app:popUpToInclusive="true" />
 	</fragment>
 	<fragment
