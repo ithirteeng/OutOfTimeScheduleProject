@@ -1,7 +1,8 @@
-package com.example.sheduleproject
+package com.example.sheduleproject.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.sheduleproject.R
 
 class MainActivity : AppCompatActivity() {
 
