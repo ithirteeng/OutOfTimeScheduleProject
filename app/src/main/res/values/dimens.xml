@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<dimen name="splash_logo_padding">100dp</dimen>
+	
+	<dimen name="entrance_logo_margin">10dp</dimen>
+	<dimen name="h1_size">30sp</dimen>
+	<dimen name="subtitle1_size">16sp</dimen>
+	<dimen name="subtitle2_size">16sp</dimen>
+
+	<dimen name="edit_text_padding">18dp</dimen>
+	<dimen name="edit_text_margin">16dp</dimen>
+
+	<dimen name="border_padding">16dp</dimen>
+
+	<dimen name="or_text_view_margin">16dp</dimen>
+	<dimen name="error_text_size">14sp</dimen>
+
+	<dimen name="login_buttons_margin">16dp</dimen>
+	<dimen name="registration_buttons_margin">16dp</dimen>
 </resources>

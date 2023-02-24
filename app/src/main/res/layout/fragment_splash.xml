@@ -12,7 +12,7 @@
 		android:layout_height="wrap_content"
 		android:contentDescription="@string/logo_tsu_description"
 		android:padding="@dimen/splash_logo_padding"
-		android:src="@drawable/tsu_logo_big"
+		android:src="@drawable/tsu_logo"
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintHorizontal_bias="0.0"
