@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.entrance.login.LoginFragment">
+    tools:context=".presentation.entrance.registration.first.RegistrationFirstFragment">
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/logoBottomGuideline"
@@ -27,11 +28,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/loginTextView"
+        android:id="@+id/registrationTextView"
         style="@style/h1_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
+        android:text="@string/registration"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/logoBottomGuideline" />
@@ -45,32 +46,48 @@
         android:text="@string/entrance_subtitle"
         app:layout_constraintEnd_toStartOf="@+id/rightBorderGuideline"
         app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/loginTextView"
+        app:layout_constraintTop_toBottomOf="@+id/registrationTextView"
         tools:ignore="TextContrastCheck" />
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/registrationButton"
         app:layout_constraintEnd_toStartOf="@+id/rightBorderGuideline"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/loginSubtitle">
+        app:layout_constraintTop_toBottomOf="@+id/loginSubtitle"
+        app:layout_constraintVertical_chainStyle="spread_inside">
+
+        <com.example.sheduleproject.presentation.entrance.registration.common.model.UserTypePickerCustomView
+            android:id="@+id/userTypePicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.example.sheduleproject.presentation.entrance.registration.common.model.UserTypePickerCustomView>
+
+        <TextView
+            android:id="@+id/pickerErrorTextView"
+            style="@style/error_text_field_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/emailEditText"
+            android:id="@+id/idEditText"
             style="@style/edit_text_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/edit_text_margin"
             android:ems="10"
-            android:hint="@string/email"
+            android:hint="@string/document_number"
             android:importantForAutofill="no"
-            android:inputType="textEmailAddress"
+            android:inputType="number"
+            android:visibility="gone"
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck" />
 
         <TextView
-            android:id="@+id/emailErrorTextView"
+            android:id="@+id/idErrorTextView"
             style="@style/error_text_field_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -78,13 +95,29 @@
         <com.example.sheduleproject.presentation.entrance.common.model.PasswordCustomView
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+
+        </com.example.sheduleproject.presentation.entrance.common.model.PasswordCustomView>
 
         <TextView
             android:id="@+id/passwordErrorTextView"
             style="@style/error_text_field_style"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <com.example.sheduleproject.presentation.entrance.common.model.PasswordCustomView
+            android:id="@+id/repeatPasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.example.sheduleproject.presentation.entrance.common.model.PasswordCustomView>
+
+        <TextView
+            android:id="@+id/twoPasswordErrorTextView"
+            style="@style/error_text_field_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -101,74 +134,32 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/border_padding" />
 
-    <View
-        android:id="@+id/leftOrLine"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/gray"
-        app:layout_constraintBottom_toBottomOf="@+id/orTextView"
-        app:layout_constraintEnd_toStartOf="@+id/orTextView"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
-        app:layout_constraintTop_toTopOf="@+id/orTextView" />
-
-    <TextView
-        android:id="@+id/orTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/or_text_view_margin"
-        android:text="@string/or"
-        app:layout_constraintEnd_toStartOf="@+id/rightOrLine"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/leftOrLine"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
-
-    <View
-        android:id="@+id/rightOrLine"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/gray"
-        app:layout_constraintBottom_toBottomOf="@+id/orTextView"
-        app:layout_constraintEnd_toStartOf="@+id/rightBorderGuideline"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/orTextView"
-        app:layout_constraintTop_toTopOf="@+id/orTextView" />
-
-    <Button
-        android:id="@+id/loginButton"
-        style="@style/empty_buttons_style"
-        android:text="@string/login"
-        app:layout_constraintEnd_toStartOf="@+id/rightBorderGuideline"
-        app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
-
     <Button
         android:id="@+id/registrationButton"
         style="@style/empty_buttons_style"
-        android:text="@string/registration"
-        app:layout_constraintBottom_toTopOf="@+id/withoutButton"
-        app:layout_constraintEnd_toStartOf="@+id/rightBorderGuideline"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/orTextView"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        tools:ignore="TextContrastCheck" />
-
-    <Button
-        android:id="@+id/withoutButton"
-        style="@style/subtitle1_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/login_buttons_margin"
-        android:layout_marginBottom="@dimen/login_buttons_margin"
-        android:background="@color/transparent"
-        android:text="@string/continue_without_registration"
-        android:textAllCaps="false"
+        android:layout_marginBottom="@dimen/registration_buttons_margin"
+        android:text="@string/registration_verb"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/rightBorderGuideline"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
-        app:layout_constraintTop_toBottomOf="@+id/registrationButton"
-        tools:ignore="TextContrastCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/login_buttons_margin"
+        android:alpha="0.5"
+        android:backgroundTint="@color/blue"
+        android:clickable="true"
+        android:contentDescription="@string/back_button_description"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,ImageContrastCheck,RedundantDescriptionCheck" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

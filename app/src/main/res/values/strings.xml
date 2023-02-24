@@ -1,10 +1,45 @@
 <resources>
-	<string name="app_name">OutOfTime</string>
-	<string name="logo_tsu_description">this is a tsu logo</string>
+    <string name="app_name">OutOfTime</string>
+    <string name="logo_tsu_description">this is a tsu logo</string>
+    <string name="eye_button_description">this is button to see password</string>
+    <string name="back_button_description">this is a button to go back</string>
 
-	<string name="login">login</string>
-	<string name="registration">registration</string>
+    <string name="empty_error">Field mustn\'t be empty!</string>
+    <string name="email_error">Email must be in format \"example@domain.com\"</string>
+    <string name="name_letters_error">Name contains only letters!</string>
+    <string name="name_case_error">Name starts with upper case letter!</string>
+    <string name="surname_letters_error">Surname contains only letters!</string>
+    <string name="surname_case_error">Surname starts with upper case letter!</string>
+    <string name="patronymic_letters_error">Patronymic contains only letters!</string>
+    <string name="patronymic_case_error">Patronymic starts with upper case letter!</string>
+    <string name="two_passwords_error">Passwords must be equal!</string>
+    <string name="password_error">Password must contains at least one upper case letter, one special symbol and one digit</string>
+    <string name="password_length_error">Password must contain more than 6 symbols</string>
+    <string name="id_number_error">Student ID number must contain only 10 digits</string>
+    <string name="default_error">default error</string>
+    <string name="ok_error">OK</string>
 
-	<string name="schedule">schedule</string>
-	<string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="login">Login</string>
+    <string name="registration">Registration</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="or">or</string>
+    <string name="registration_verb">Registration</string>
+    <string name="continue_registration">Continue registration</string>
+    <string name="continue_without_registration">Continue without registration</string>
+    <string name="surname">Surname</string>
+    <string name="name">Name</string>
+    <string name="patronymic">Patronymic</string>
+    <string name="student">Student</string>
+    <string name="teacher">Teacher</string>
+    <string name="document_number">Student ID number</string>
+    <string name="repeat_password">Repeat password</string>
+
+    <string name="schedule">Schedule</string>
+    <string name="empty_string"/>
+
+    <string name="entrance_subtitle">and see your incredible \n schedule</string>
+
+
 </resources>

@@ -1,4 +1,4 @@
-package com.example.sheduleproject.presentation.main
+package com.example.sheduleproject.presentation.schedule
 
 import android.os.Bundle
 import android.view.LayoutInflater

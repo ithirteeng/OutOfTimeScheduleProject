@@ -1,14 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	tools:context=".presentation.entrance.registration.RegistrationFragment">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.entrance.registration.first.RegistrationFirstFragment">
 
 
-	<TextView
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:text="@string/hello_blank_fragment" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/logoBottomGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/entrance_logo_margin"
+        android:contentDescription="@string/logo_tsu_description"
+        android:src="@drawable/tsu_logo"
+        app:layout_constraintBottom_toTopOf="@+id/logoBottomGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/registrationTextView"
+        style="@style/h1_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/logoBottomGuideline" />
+
+    <TextView
+        android:id="@+id/loginSubtitle"
+        style="@style/subtitle1_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:text="@string/entrance_subtitle"
+        app:layout_constraintEnd_toStartOf="@+id/rightBorderGuideline"
+        app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/registrationTextView"
+        tools:ignore="TextContrastCheck" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/nextPageButton"
+        app:layout_constraintEnd_toStartOf="@+id/rightBorderGuideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/loginSubtitle"
+        app:layout_constraintVertical_chainStyle="spread_inside">
+
+        <EditText
+            android:id="@+id/emailEditText"
+            style="@style/edit_text_style"
+            android:layout_marginTop="@dimen/edit_text_margin"
+            android:ems="10"
+            android:hint="@string/email"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/emailErrorTextView"
+            style="@style/error_text_field_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/surnameEditText"
+            style="@style/edit_text_style"
+            android:ems="15"
+            android:hint="@string/surname"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/surnameErrorTextView"
+            style="@style/error_text_field_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/nameEditText"
+            style="@style/edit_text_style"
+            android:ems="15"
+            android:hint="@string/name"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/nameErrorTextView"
+            style="@style/error_text_field_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="TextContrastCheck" />
+
+        <EditText
+            android:id="@+id/patronymicEditText"
+            style="@style/edit_text_style"
+            android:ems="15"
+            android:hint="@string/patronymic"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/patronymicErrorTextView"
+            style="@style/error_text_field_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="TextContrastCheck" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftBorderGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/border_padding" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightBorderGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/border_padding" />
+
+    <Button
+        android:id="@+id/nextPageButton"
+        style="@style/empty_buttons_style"
+        android:layout_marginBottom="@dimen/registration_buttons_margin"
+        android:text="@string/continue_registration"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rightBorderGuideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:ignore="TextContrastCheck" />
+
+	<com.google.android.material.floatingactionbutton.FloatingActionButton
+		android:id="@+id/backButton"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/login_buttons_margin"
+		android:alpha="0.5"
+		android:backgroundTint="@color/blue"
+		android:clickable="true"
+		android:contentDescription="@string/back_button_description"
+		android:scaleX="0.8"
+		android:scaleY="0.8"
+		android:src="@drawable/ic_arrow_back"
+		app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
+		app:layout_constraintTop_toTopOf="parent"
+		tools:ignore="SpeakableTextPresentCheck,RedundantDescriptionCheck,TouchTargetSizeCheck,ImageContrastCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

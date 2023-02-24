@@ -1,0 +1,17 @@
+package com.example.sheduleproject.domain.entrance.utils
+
+enum class ValidationResult {
+    EMPTY_ERROR,
+    NAME_LETTER_ERROR,
+    NAME_CASE_ERROR,
+    SURNAME_LETTER_ERROR,
+    SURNAME_CASE_ERROR,
+    PATRONYMIC_LETTER_ERROR,
+    PATRONYMIC_CASE_ERROR,
+    PASSWORD_ERROR,
+    PASSWORD_LENGTH_ERROR,
+    TWO_PASSWORDS_ERROR,
+    EMAIL_ERROR,
+    ID_NUMBER_ERROR,
+    OK
+}
