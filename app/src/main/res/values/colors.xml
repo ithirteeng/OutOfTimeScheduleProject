@@ -1,18 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="purple_200">#FFBB86FC</color>
-	<color name="purple_500">#FF6200EE</color>
-	<color name="purple_700">#FF3700B3</color>
-	<color name="teal_200">#FF03DAC5</color>
-	<color name="teal_700">#FF018786</color>
-	<color name="black">#FF000000</color>
-	<color name="white">#FFFFFFFF</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
 
-	<color name="black_light">#333333</color>
-	<color name="black_medium">#181818</color>
-	<color name="gray">#757575</color>
-	<color name="black_medium_transparent">#7A181818</color>
-	<color name="blue">#5090F3</color>
-	<color name="red">#FF2222</color>
-	<color name="transparent">#00000000</color>
+    <color name="black_light">#333333</color>
+    <color name="black_medium">#181818</color>
+    <color name="gray">#757575</color>
+    <color name="gray_light">#DFDEDE</color>
+    <color name="gray_black">#5b5b5b</color>
+    <color name="black_medium_transparent">#7A181818</color>
+    <color name="blue">#5090F3</color>
+    <color name="red">#FF2222</color>
+    <color name="transparent">#00000000</color>
+
+
+    <color name="practice_border">#2F80ED</color>
+    <color name="practice_main">#1A0EA5E9</color>
+    <color name="practice_text_color">#0369A1</color>
+
+    <color name="lecture_border">#8B5CF6</color>
+    <color name="lecture_main">#1A8B5CF6</color>
+    <color name="lecture_text_color">#8B5CF6</color>
+
+    <color name="exam_border">#CF4C4C</color>
+    <color name="exam_main">#1AB82C2C</color>
+    <color name="exam_text_color">#B82C2C</color>
+
+    <color name="seminar_border">#FFCD93</color>
+    <color name="seminar_main">#1AF59E0B</color>
+    <color name="seminar_text_color">#F59E0B</color>
+
+    <color name="laboratory_border">#10B981</color>
+    <color name="laboratory_main">#1A10B981</color>
+    <color name="laboratory_text_color">#047857</color>
+
+    <color name="default_border">#000000</color>
+    <color name="default_main">#1A232323</color>
+    <color name="default_text_color">#232323</color>
 </resources>

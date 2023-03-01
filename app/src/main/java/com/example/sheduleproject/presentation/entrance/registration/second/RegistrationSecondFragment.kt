@@ -14,7 +14,6 @@ import com.example.sheduleproject.common.UserType
 import com.example.sheduleproject.databinding.FragmentRegistrationSecondBinding
 import com.example.sheduleproject.domain.entrance.registration.entity.first.RegistrationFirstEntity
 import com.example.sheduleproject.domain.entrance.utils.ValidationResult
-import com.example.sheduleproject.domain.entrance.utils.toStringError
 import com.example.sheduleproject.presentation.entrance.common.model.setEditTextsInputSpaceFilter
 import com.example.sheduleproject.presentation.entrance.registration.first.RegistrationFirstFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -164,7 +163,7 @@ class RegistrationSecondFragment : Fragment() {
         when (validationResult) {
             ValidationResult.OK -> textView.visibility = View.GONE
             else -> {
-                textView.text = validationResult.toStringError(requireContext())
+                textView.text = validationResult.getErrorString(requireContext())
                 textView.visibility = View.VISIBLE
             }
         }

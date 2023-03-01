@@ -23,7 +23,7 @@
         android:id="@+id/teacherButton"
         style="@style/user_type_picker_style"
         android:background="@drawable/user_type_picker_empty_right_part"
-        android:text="@string/teacher"
+        android:text="@string/educator"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/studentButton"
