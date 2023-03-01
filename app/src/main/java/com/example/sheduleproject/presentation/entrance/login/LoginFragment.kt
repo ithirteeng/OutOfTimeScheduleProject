@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.sheduleproject.R
 import com.example.sheduleproject.databinding.FragmentLoginBinding
 import com.example.sheduleproject.domain.entrance.utils.ValidationResult
-import com.example.sheduleproject.domain.entrance.utils.toStringError
 import com.example.sheduleproject.presentation.entrance.common.model.setEditTextsInputSpaceFilter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -49,9 +48,9 @@ class LoginFragment : Fragment() {
     private fun onLoginButtonClick() {
         binding.loginButton.setOnClickListener {
             validateAllFields()
-            if (!checkIfFieldsHaveErrors()) {
-                navigateToScheduleFragment()
-            }
+            //if (!checkIfFieldsHaveErrors()) {
+            navigateToScheduleFragment()
+            //  }
         }
     }
 
@@ -109,7 +108,7 @@ class LoginFragment : Fragment() {
         when (validationResult) {
             ValidationResult.OK -> textView.visibility = View.GONE
             else -> {
-                textView.text = validationResult.toStringError(requireContext())
+                textView.text = validationResult.getErrorString(requireContext())
                 textView.visibility = View.VISIBLE
             }
         }

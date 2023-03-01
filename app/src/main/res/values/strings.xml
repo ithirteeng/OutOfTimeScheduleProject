@@ -3,24 +3,45 @@
     <string name="logo_tsu_description">this is a tsu logo</string>
     <string name="eye_button_description">this is button to see password</string>
     <string name="back_button_description">this is a button to go back</string>
+    <string name="menu_button_description">this is a menu button</string>
 
     <string name="empty_error">Field mustn\'t be empty!</string>
     <string name="email_error">Email must be in format \"example@domain.com\"</string>
-    <string name="name_letters_error">Name contains only letters!</string>
-    <string name="name_case_error">Name starts with upper case letter!</string>
-    <string name="surname_letters_error">Surname contains only letters!</string>
-    <string name="surname_case_error">Surname starts with upper case letter!</string>
-    <string name="patronymic_letters_error">Patronymic contains only letters!</string>
-    <string name="patronymic_case_error">Patronymic starts with upper case letter!</string>
+    <string name="name_letters_error">Name must contain only letters!</string>
+    <string name="name_case_error">Name must start with upper case letter!</string>
+    <string name="surname_letters_error">Surname must contain only letters!</string>
+    <string name="surname_case_error">Surname must start with upper case letter!</string>
+    <string name="patronymic_letters_error">Patronymic must contain only letters!</string>
+    <string name="patronymic_case_error">Patronymic must start with upper case letter!</string>
     <string name="two_passwords_error">Passwords must be equal!</string>
-    <string name="password_error">Password must contains at least one upper case letter, one special symbol and one digit</string>
+    <string name="password_error">Password must contain at least one upper case letter, one special symbol and one digit</string>
     <string name="password_length_error">Password must contain more than 6 symbols</string>
     <string name="id_number_error">Student ID number must contain only 10 digits</string>
     <string name="default_error">default error</string>
     <string name="ok_error">OK</string>
 
+    <string name="monday_short">m.</string>
+    <string name="tuesday_short">t.</string>
+    <string name="wednesday_short">w.</string>
+    <string name="thursday_short">th.</string>
+    <string name="friday_short">fr.</string>
+    <string name="sunday_short">sn.</string>
+    <string name="saturday_short">s.</string>
 
-    <string name="login">Login</string>
+    <string name="january">january</string>
+    <string name="february">february</string>
+    <string name="march">march</string>
+    <string name="april">april</string>
+    <string name="may">may</string>
+    <string name="june">june</string>
+    <string name="july">july</string>
+    <string name="august">august</string>
+    <string name="september">september</string>
+    <string name="october">october</string>
+    <string name="november">november</string>
+    <string name="december">december</string>
+
+    <string name="login_verb">Log in</string>
     <string name="registration">Registration</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -32,14 +53,23 @@
     <string name="name">Name</string>
     <string name="patronymic">Patronymic</string>
     <string name="student">Student</string>
-    <string name="teacher">Teacher</string>
+    <string name="educator">Educator</string>
     <string name="document_number">Student ID number</string>
     <string name="repeat_password">Repeat password</string>
 
     <string name="schedule">Schedule</string>
-    <string name="empty_string"/>
+    <string name="empty_string" />
 
     <string name="entrance_subtitle">and see your incredible \n schedule</string>
+
+    <string name="default_cluster_number">000000</string>
+    <string name="default_class_time_text">8:45 – 10:20</string>
+    <string name="default_date_text">m. 1 january 1970</string>
+    <string name="default_day_text">1</string>
+    <string name="default_class_text">Class</string>
+    <string name="default_educator_text">Educator Educatorovich Educatorov</string>
+    <string name="default_lecture_text">214 (2) text</string>
+
 
 
 </resources>
