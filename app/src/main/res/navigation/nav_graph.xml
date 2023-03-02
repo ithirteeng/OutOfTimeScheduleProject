@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/nav_graph"
+	app:startDestination="@id/splashFragment">
+
+	<fragment
+		android:id="@+id/splashFragment"
+		android:name="com.example.sheduleproject.presentation.splash.SplashFragment"
+		android:label="fragment_splash"
+		tools:layout="@layout/fragment_splash" >
+		<action
+			android:id="@+id/action_splashFragment_to_loginFragment"
+			app:destination="@id/loginFragment"
+			app:popUpTo="@id/splashFragment"
+			app:popUpToInclusive="true" />
+		<action
+			android:id="@+id/action_splashFragment_to_scheduleFragment"
+			app:destination="@id/scheduleFragment"
+			app:popUpTo="@id/splashFragment"
+			app:popUpToInclusive="true" />
+	</fragment>
+	<fragment
+		android:id="@+id/loginFragment"
+		android:name="com.example.sheduleproject.presentation.entrance.login.LoginFragment"
+		android:label="fragment_login"
+		tools:layout="@layout/fragment_login" >
+		<action
+			android:id="@+id/action_loginFragment_to_registrationFragment"
+			app:destination="@id/registrationFragment" />
+		<action
+			android:id="@+id/action_loginFragment_to_scheduleFragment"
+			app:destination="@id/scheduleFragment"
+			app:popUpTo="@id/loginFragment"
+			app:popUpToInclusive="true" />
+	</fragment>
+	<fragment
+		android:id="@+id/registrationFragment"
+		android:name="com.example.sheduleproject.presentation.entrance.registration.first.RegistrationFirstFragment"
+		android:label="fragment_registration"
+		tools:layout="@layout/fragment_registration" >
+		<action
+			android:id="@+id/action_registrationFragment_to_loginFragment"
+			app:destination="@id/loginFragment" />
+		<action
+			android:id="@+id/action_registrationFragment_to_registrationSecondFragment"
+			app:destination="@id/registrationSecondFragment" />
+	</fragment>
+	<fragment
+		android:id="@+id/scheduleFragment"
+		android:name="com.example.sheduleproject.presentation.schedule.ScheduleFragment"
+		android:label="fragment_shedule"
+		tools:layout="@layout/fragment_schedule" />
+	<fragment
+		android:id="@+id/registrationSecondFragment"
+		android:name="com.example.sheduleproject.presentation.entrance.registration.second.RegistrationSecondFragment"
+		android:label="fragment_registration_second"
+		tools:layout="@layout/fragment_registration_second" >
+		<action
+			android:id="@+id/action_registrationSecondFragment_to_registrationFragment"
+			app:destination="@id/registrationFragment" />
+		<action
+			android:id="@+id/action_registrationSecondFragment_to_scheduleFragment"
+			app:destination="@id/scheduleFragment"
+			app:popUpTo="@id/loginFragment"
+			app:popUpToInclusive="true" />
+	</fragment>
+</navigation>
