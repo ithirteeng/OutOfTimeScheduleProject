@@ -1,4 +1,4 @@
-package com.example.sheduleproject.data.schedule.model
+package com.example.sheduleproject.data.common.model
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

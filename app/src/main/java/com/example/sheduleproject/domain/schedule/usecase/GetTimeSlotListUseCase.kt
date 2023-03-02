@@ -1,6 +1,6 @@
 package com.example.sheduleproject.domain.schedule.usecase
 
-import com.example.sheduleproject.domain.schedule.entity.TimeSlotEntity
+import com.example.sheduleproject.domain.common.entity.TimeSlotEntity
 import com.example.sheduleproject.domain.schedule.repository.ScheduleRepository
 
 class GetTimeSlotListUseCase(

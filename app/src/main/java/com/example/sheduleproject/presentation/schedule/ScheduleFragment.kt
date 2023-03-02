@@ -1,6 +1,7 @@
 package com.example.sheduleproject.presentation.schedule
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,11 @@ import com.example.sheduleproject.databinding.FragmentScheduleBinding
 import com.example.sheduleproject.domain.schedule.utils.DateTimeHelper
 import com.example.sheduleproject.presentation.schedule.adapter.ClassesAdapter
 import com.example.sheduleproject.presentation.schedule.model.listOfEntities
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScheduleFragment : Fragment() {
+
+    private val viewModel: ScheduleFragmentViewModel by viewModel()
 
     private lateinit var binding: FragmentScheduleBinding
 
@@ -33,6 +37,11 @@ class ScheduleFragment : Fragment() {
 
         setupViews()
         binding.recyclerView.adapter = classesAdapter
+
+        viewModel.getTimeSlotListLiveData().observe(this.viewLifecycleOwner) {
+            Log.d("TIMESLOT", it.toString())
+        }
+
 
         return binding.root
     }
