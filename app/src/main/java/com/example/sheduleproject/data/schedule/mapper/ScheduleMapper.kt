@@ -11,12 +11,14 @@ fun List<TimeSlotEntity>.toModelsList(): List<TimeSlotModel> =
 
 private fun TimeSlotModel.toEntity(): TimeSlotEntity =
     TimeSlotEntity(
+        number = number,
         startTime = startTime,
         endTime = endTime
     )
 
 private fun TimeSlotEntity.toModel(): TimeSlotModel =
     TimeSlotModel(
+        number = number,
         startTime = startTime,
         endTime = endTime
     )
