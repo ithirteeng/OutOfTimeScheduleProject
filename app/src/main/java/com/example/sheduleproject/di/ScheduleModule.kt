@@ -1,7 +1,7 @@
 package com.example.sheduleproject.di
 
 import com.example.sheduleproject.data.schedule.repository.ScheduleRepositoryImpl
-import com.example.sheduleproject.data.storage.TimeSlotStorage
+import com.example.sheduleproject.data.common.storage.TimeSlotStorage
 import com.example.sheduleproject.domain.schedule.repository.ScheduleRepository
 import com.example.sheduleproject.domain.schedule.usecase.GetTimeSlotListUseCase
 import com.example.sheduleproject.presentation.schedule.ScheduleFragmentViewModel

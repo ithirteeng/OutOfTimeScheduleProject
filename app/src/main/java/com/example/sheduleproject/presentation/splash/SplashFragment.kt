@@ -11,10 +11,13 @@ import com.example.sheduleproject.R
 import com.example.sheduleproject.databinding.FragmentSplashBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SplashFragment : Fragment() {
 
     private lateinit var binding: FragmentSplashBinding
+
+    private val viewModel: SplashFragmentViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,13 +26,24 @@ class SplashFragment : Fragment() {
         val mainView = inflater.inflate(R.layout.fragment_splash, container, false)
         binding = FragmentSplashBinding.bind(mainView)
 
+        getAndSaveTimeSlotsList()
+
         lifecycleScope.launch {
             delay(1000)
             navigateToLoginFragment()
-            //navigateToScheduleFragment()
         }
 
+
+
         return binding.root
+    }
+
+    private fun getAndSaveTimeSlotsList() {
+        viewModel.getTimeSlotsLiveData().observe(this.viewLifecycleOwner) {
+            if (it != null) {
+                viewModel.saveTimeSlotsListToLocalStorage(it)
+            }
+        }
     }
 
     private fun navigateToLoginFragment() {

@@ -1,7 +1,7 @@
-package com.example.sheduleproject.data.storage
+package com.example.sheduleproject.data.common.storage
 
 import android.content.Context
-import com.example.sheduleproject.data.schedule.model.TimeSlotModel
+import com.example.sheduleproject.data.common.model.TimeSlotModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type

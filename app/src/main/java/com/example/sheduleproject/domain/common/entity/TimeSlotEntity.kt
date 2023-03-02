@@ -1,4 +1,4 @@
-package com.example.sheduleproject.domain.schedule.entity
+package com.example.sheduleproject.domain.common.entity
 
 data class TimeSlotEntity(
     val number: Int,
