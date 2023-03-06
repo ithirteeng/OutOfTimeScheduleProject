@@ -5,7 +5,7 @@ import java.util.*
 
 data class SubjectModel(
     @SerializedName("id")
-    var id: UUID?,
+    var id: String?,
     @SerializedName("name")
     var name: String?
 )

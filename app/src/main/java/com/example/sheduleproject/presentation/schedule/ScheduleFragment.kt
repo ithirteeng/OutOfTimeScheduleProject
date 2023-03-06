@@ -1,7 +1,6 @@
 package com.example.sheduleproject.presentation.schedule
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import com.example.sheduleproject.R
 import com.example.sheduleproject.databinding.FragmentScheduleBinding
 import com.example.sheduleproject.domain.schedule.utils.DateTimeHelper
 import com.example.sheduleproject.presentation.schedule.adapter.ClassesAdapter
-import com.example.sheduleproject.presentation.schedule.model.listOfEntities
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScheduleFragment : Fragment() {
@@ -32,31 +30,105 @@ class ScheduleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val mainView = inflater.inflate(R.layout.fragment_schedule, container, false)
+
         binding = FragmentScheduleBinding.bind(mainView)
         dateTimeHelper = DateTimeHelper(requireContext())
 
-        setupViews()
-        binding.recyclerView.adapter = classesAdapter
+        binding.weekCustomView.refreshData()
 
-        viewModel.getTimeSlotListLiveData().observe(this.viewLifecycleOwner) {
-            Log.d("TIMESLOT", it.toString())
-        }
+        binding.progressBar.visibility = View.VISIBLE
 
+        onGettingTimeslotsList()
+        remakeClassesListRequest()
+
+        setupWeekCustomView()
+
+        onSwipeToRefreshPull()
 
         return binding.root
     }
 
-    private fun setupViews() {
-        classesAdapter.setList(listOfEntities)
-        setupTextViews()
+    private fun setupOnWeekArrowsClickFunctions() {
+        binding.weekCustomView.onLeftArrowButtonClick {
+            setupFullDateTextView(binding.weekCustomView.getSelectedDate())
+            remakeClassesListRequest()
+
+            binding.progressBar.visibility = View.VISIBLE
+
+        }
+
+        binding.weekCustomView.onRightArrowButtonClick {
+            setupFullDateTextView(binding.weekCustomView.getSelectedDate())
+            remakeClassesListRequest()
+
+            binding.progressBar.visibility = View.VISIBLE
+        }
     }
 
-    private fun setupTextViews() {
-        binding.fullDateTextView.text = getFullCurrentDate()
+    private fun onSwipeToRefreshPull() {
+        binding.swipeToRefresh.setOnRefreshListener {
+            onGettingTimeslotsList()
+            remakeClassesListRequest()
+        }
     }
 
+    private fun onErrorAppearance() {
+        binding.progressBar.visibility = View.VISIBLE
+        binding.swipeToRefresh.isRefreshing = false
+    }
 
-    private fun getFullCurrentDate(): String {
+    private fun onGettingClassesList(
+        startDate: String,
+        endDate: String
+    ) {
+        viewModel.getClassesListLiveData(
+            startDate = startDate,
+            endDate = endDate,
+            onErrorAppeared = { onErrorAppearance() }
+        ).observe(this.viewLifecycleOwner) {
+            viewModel.saveClassesListToLocalStorage(it)
+            getClassesListByDateFromLocalStorage(binding.weekCustomView.getSelectedDate())
+            setupOnWeekArrowsClickFunctions()
+            binding.progressBar.visibility = View.GONE
+            binding.swipeToRefresh.isRefreshing = false
+        }
+    }
+
+    private fun getClassesListByDateFromLocalStorage(date: String) {
+        val list = viewModel.getClassesListByDateFromStorage(date)
+        classesAdapter.setClassesList(ArrayList(list))
+
+        binding.recyclerView.adapter = classesAdapter
+    }
+
+    private fun setupWeekCustomView() {
+        binding.weekCustomView.setupWeekCustomView(onDateClick = {
+            val date = binding.weekCustomView.getSelectedDate()
+            setupFullDateTextView(date)
+            getClassesListByDateFromLocalStorage(date)
+        })
+    }
+
+    private fun remakeClassesListRequest() {
+        onGettingClassesList(
+            startDate = binding.weekCustomView.getWeekDatesList()[0],
+            endDate = binding.weekCustomView.getWeekDatesList()[6],
+        )
+    }
+
+    private fun setupFullDateTextView(date: String) {
+        binding.fullDateTextView.text = getFullDate(date)
+    }
+
+    private fun onGettingTimeslotsList() {
+        viewModel.getTimeSlotListLiveData().observe(this.viewLifecycleOwner) {
+            classesAdapter.setTimeSlotsList(it)
+        }
+    }
+
+    private fun getFullDate(date: String): String {
+        dateTimeHelper.setDate(date)
+
         val dayName = dateTimeHelper.getCurrentDayOfWeek()
         val dayNumber = dateTimeHelper.getCurrentDayOfMonth()
         val monthName = dateTimeHelper.getCurrentMonth()

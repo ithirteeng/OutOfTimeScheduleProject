@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.example.sheduleproject.R
 import com.example.sheduleproject.databinding.DayCustomViewLayoutBinding
+import com.example.sheduleproject.domain.schedule.utils.DateTimeHelper
 
 
 class DayCustomView @JvmOverloads constructor(
@@ -15,19 +16,47 @@ class DayCustomView @JvmOverloads constructor(
 
     private val binding = DayCustomViewLayoutBinding.inflate(LayoutInflater.from(context), this)
 
+    private val dateTimeHelper = DateTimeHelper(context)
+
+    private var isDaySelected = false
+
+    fun setupDayData(date: String, dayIndex: Int) {
+        this.date = date
+        this.dayIndex = dayIndex
+
+        setDayName()
+        setDayNumber()
+    }
+
+    private var date: String = ""
+    private var dayIndex: Int = 0
+
+    fun isDaySelected(): Boolean = isDaySelected
+
+    fun getDate(): String = this.date
+
     fun setOnClickListener(onClick: () -> Unit) {
         binding.cardView.setOnClickListener {
-            colorizeInBlack()
             onClick()
         }
     }
 
-    fun setDayName(dayName: String) {
-        binding.dayNameTextView.text = dayName
+    fun setSelection() {
+        isDaySelected = true
+        colorizeInBlack()
     }
 
-    fun setDayNumber(dayNumber: Int) {
-        binding.dayNumberTextView.text = dayNumber.toString()
+    fun clearSelection() {
+        isDaySelected = false
+        colorizeInWhite()
+    }
+
+    private fun setDayName() {
+        binding.dayNameTextView.text = dateTimeHelper.mapDayCardMonthToCorrectView(dayIndex)
+    }
+
+    private fun setDayNumber() {
+        binding.dayNumberTextView.text = dateTimeHelper.mapDayCardNumberToCorrectForm(date)
     }
 
     private fun colorizeInBlack() {
@@ -36,7 +65,7 @@ class DayCustomView @JvmOverloads constructor(
         binding.dayNumberTextView.setTextColor(context.getColor(R.color.white))
     }
 
-    fun colorizeInWhite() {
+    private fun colorizeInWhite() {
         binding.cardView.setCardBackgroundColor(context.getColor(R.color.white))
         binding.dayNameTextView.setTextColor(context.getColor(R.color.gray_black))
         binding.dayNumberTextView.setTextColor(context.getColor(R.color.gray_black))

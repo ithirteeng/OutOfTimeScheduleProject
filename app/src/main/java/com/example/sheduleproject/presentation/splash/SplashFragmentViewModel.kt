@@ -24,7 +24,7 @@ class SplashFragmentViewModel(
                     timeSlotsListLiveData.value = it
                 }
                 .onFailure {
-                    Log.e("sdf", "SDFs", it)
+                    Log.e("API_ERROR", "splash", it)
                 }
         }
     }

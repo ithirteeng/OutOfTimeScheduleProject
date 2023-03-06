@@ -1,10 +1,8 @@
 package com.example.sheduleproject.domain.schedule.entity
 
-import java.util.UUID
-
 data class LectureHallEntity(
-    var id: UUID?,
+    var id: String?,
     val name: String,
-    val hostBuildingId: UUID,
+    val hostBuilding: CampusBuildingEntity,
     val capacity: Int
 )

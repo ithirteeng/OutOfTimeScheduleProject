@@ -10,10 +10,11 @@ class TimeSlotStorage(context: Context) {
 
     companion object {
         const val TIMESLOT_KEY = "timeslot key"
-        const val STORAGE_NAME = "storage name"
+        const val TIME_STORAGE_NAME = "time storage name"
     }
 
-    private val sharedPreferences = context.getSharedPreferences(STORAGE_NAME, Context.MODE_PRIVATE)
+    private val sharedPreferences =
+        context.getSharedPreferences(TIME_STORAGE_NAME, Context.MODE_PRIVATE)
 
     fun saveTimeSlotsListToLocalStorage(timeSlotList: List<TimeSlotModel>) {
         val json = Gson().toJson(timeSlotList)
@@ -26,11 +27,5 @@ class TimeSlotStorage(context: Context) {
         val json = sharedPreferences.getString(TIMESLOT_KEY, null)
         val type: Type = object : TypeToken<List<TimeSlotModel>>() {}.type
         return Gson().fromJson(json, type)
-    }
-
-    fun clearSharedPreferences() {
-        sharedPreferences.edit()
-            .clear()
-            .apply()
     }
 }

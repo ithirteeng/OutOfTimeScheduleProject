@@ -7,6 +7,9 @@ val networkModule = module {
     factory { setupLoggingInterceptor() }
     factory { setupNetworkConnectionInterceptor() }
     factory { setupOkHttpClient(loggingInterceptor = get(), networkConnectionInterceptor = get()) }
-    factory { setupSplashApi(retrofit = get()) }
     single { setupRetrofit(okHttpClient = get()) }
+
+    single { setupSplashApi(retrofit = get()) }
+    single { setupScheduleApi(retrofit = get()) }
+
 }

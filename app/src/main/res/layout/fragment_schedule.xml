@@ -1,120 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/swipeToRefresh"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/schedule_screen_padding"
+    android:orientation="vertical"
     tools:context=".presentation.schedule.ScheduleFragment">
 
-    <TextView
-        android:id="@+id/clusterNumberTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/default_cluster_number"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/cluster_text_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/fullDateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nunito_bold"
-        android:text="@string/default_date_text"
-        android:textColor="@color/black"
-        android:textSize="@dimen/full_date_text_size"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clusterNumberTextView" />
-
-    <ImageButton
-        android:id="@+id/menuButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent"
-        android:contentDescription="@string/menu_button_description"
-        android:src="@drawable/menu_button_background"
-        app:layout_constraintBottom_toBottomOf="@+id/fullDateTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/clusterNumberTextView"
-        tools:ignore="TouchTargetSizeCheck,RedundantDescriptionCheck" />
-
-    <HorizontalScrollView
-        android:id="@+id/daysScrollView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:overScrollMode="never"
-        android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fullDateTextView">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="3dp"
+            android:padding="@dimen/schedule_screen_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/clusterNumberTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/default_cluster_number"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/cluster_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fullDateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/default_date_text"
+                android:textColor="@color/black"
+                android:textSize="@dimen/full_date_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clusterNumberTextView" />
+
+            <ImageButton
+                android:id="@+id/menuButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:contentDescription="@string/menu_button_description"
+                android:src="@drawable/menu_button_background"
+                app:layout_constraintBottom_toBottomOf="@+id/fullDateTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/clusterNumberTextView"
+                tools:ignore="TouchTargetSizeCheck,RedundantDescriptionCheck" />
+
+            <com.example.sheduleproject.presentation.schedule.model.WeekCustomView
+                android:id="@+id/weekCustomView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fullDateTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:paddingStart="@dimen/schedule_screen_padding"
+            android:paddingEnd="@dimen/schedule_screen_padding"
+            android:paddingBottom="@dimen/schedule_screen_padding"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/class_custom_view_layout" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:indeterminateTint="@color/gray_black"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
 
-            <com.example.sheduleproject.presentation.schedule.model.DayCustomView
-                android:id="@+id/mondayCardView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <com.example.sheduleproject.presentation.schedule.model.DayCustomView
-                android:id="@+id/tuesdayCardView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <com.example.sheduleproject.presentation.schedule.model.DayCustomView
-                android:id="@+id/wednesdayCardView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <com.example.sheduleproject.presentation.schedule.model.DayCustomView
-                android:id="@+id/thursdayCardView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <com.example.sheduleproject.presentation.schedule.model.DayCustomView
-                android:id="@+id/fridayCardView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <com.example.sheduleproject.presentation.schedule.model.DayCustomView
-                android:id="@+id/saturdayCardView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <com.example.sheduleproject.presentation.schedule.model.DayCustomView
-                android:id="@+id/sundayCardView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-
-        </LinearLayout>
-
-    </HorizontalScrollView>
-
-    <View
-        android:id="@+id/dividerView"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/gray_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/daysScrollView" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dividerView"
-        tools:listitem="@layout/class_custom_view_layout" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

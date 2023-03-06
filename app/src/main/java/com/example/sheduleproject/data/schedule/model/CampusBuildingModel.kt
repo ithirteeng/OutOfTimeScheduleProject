@@ -5,11 +5,11 @@ import java.util.*
 
 data class CampusBuildingModel(
     @SerializedName("id")
-    var id: UUID?,
+    var id: String?,
     @SerializedName("address")
     var address: String?,
     @SerializedName("name")
     var name: String?,
-    @SerializedName("lectureHalls")
-    var lectureHalls: List<String?>?
+    @SerializedName("lectureHallIds")
+    var lectureHallIds: List<String?>?
 )

@@ -1,26 +1,37 @@
 package com.example.sheduleproject.domain.schedule.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import com.example.sheduleproject.R
+import java.text.SimpleDateFormat
 import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.util.*
 
 class DateTimeHelper(val context: Context) {
+
+    private var fullCalendar = Calendar.getInstance()
+
+    @SuppressLint("SimpleDateFormat")
+    fun setDate(date: String) {
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        fullCalendar.time = simpleDateFormat.parse(date)!!
+    }
+
     fun getCurrentDayOfWeek(): String =
-        convertDays(Calendar.getInstance().get(Calendar.DAY_OF_WEEK))
+        convertDays(fullCalendar.get(Calendar.DAY_OF_WEEK))
 
 
     fun getCurrentDayOfMonth(): Int =
-        Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        fullCalendar.get(Calendar.DAY_OF_MONTH)
 
 
     fun getCurrentMonth(): String =
-        convertMonths(Calendar.getInstance().get(Calendar.MONTH))
+        convertMonths(fullCalendar.get(Calendar.MONTH))
 
 
     fun getCurrentYear(): Int =
-        Calendar.getInstance().get(Calendar.YEAR)
+        fullCalendar.get(Calendar.YEAR)
 
 
     private fun convertMonths(monthIndex: Int): String {
@@ -58,6 +69,47 @@ class DateTimeHelper(val context: Context) {
         val localDateTime = zonedDateTime.toLocalDateTime()
         val localDateTimeString = localDateTime.toString()
         return localDateTimeString.split('T')[1]
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun getCalendar(weeksDeviation: Int): ArrayList<String> {
+
+        val calendar = Calendar.getInstance()
+        calendar.firstDayOfWeek = Calendar.MONDAY
+        calendar.add(Calendar.WEEK_OF_MONTH, weeksDeviation)
+        calendar[Calendar.DAY_OF_WEEK] = calendar.firstDayOfWeek
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+
+        val days: ArrayList<String> = arrayListOf()
+
+        for (i in 0..6) {
+            days.add(simpleDateFormat.format(calendar.time))
+            calendar.add(Calendar.DAY_OF_WEEK, 1)
+        }
+
+        return days
+    }
+
+    fun compareDates(fullDate: String, date: String): Boolean {
+        return fullDate.split("T")[0] == date
+    }
+
+    fun getCurrentDayIndex(): Int = when (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+        Calendar.MONDAY -> 0
+        Calendar.TUESDAY -> 1
+        Calendar.WEDNESDAY -> 2
+        Calendar.THURSDAY -> 3
+        Calendar.FRIDAY -> 4
+        Calendar.SATURDAY -> 5
+        else -> 6
+    }
+
+    fun mapDayCardMonthToCorrectView(dayIndex: Int): String {
+        return convertDays(dayIndex)
+    }
+
+    fun mapDayCardNumberToCorrectForm(date: String): String {
+        return date.split('-')[2]
     }
 
 }

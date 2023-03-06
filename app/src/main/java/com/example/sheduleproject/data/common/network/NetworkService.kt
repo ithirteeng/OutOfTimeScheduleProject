@@ -2,6 +2,7 @@ package com.example.sheduleproject.data.common.network
 
 import com.example.sheduleproject.BuildConfig
 import com.example.sheduleproject.data.common.network.interceptor.NetworkConnectionInterceptor
+import com.example.sheduleproject.data.schedule.api.ScheduleApi
 import com.example.sheduleproject.data.splash.api.SplashApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -39,3 +40,5 @@ fun setupRetrofit(okHttpClient: OkHttpClient): Retrofit =
         .build()
 
 fun setupSplashApi(retrofit: Retrofit): SplashApi = retrofit.create(SplashApi::class.java)
+
+fun setupScheduleApi(retrofit: Retrofit): ScheduleApi = retrofit.create(ScheduleApi::class.java)
