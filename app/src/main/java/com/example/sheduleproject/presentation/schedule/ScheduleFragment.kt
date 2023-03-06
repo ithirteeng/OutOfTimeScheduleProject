@@ -42,6 +42,7 @@ class ScheduleFragment : Fragment() {
         remakeClassesListRequest()
 
         setupWeekCustomView()
+        setupFullDateTextView(binding.weekCustomView.getSelectedDate())
 
         onSwipeToRefreshPull()
 
