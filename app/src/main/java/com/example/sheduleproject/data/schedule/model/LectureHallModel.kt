@@ -5,11 +5,11 @@ import java.util.*
 
 data class LectureHallModel(
     @SerializedName("id")
-    var id: UUID?,
+    var id: String?,
     @SerializedName("name")
     val name: String,
-    @SerializedName("hostBuildingId")
-    val hostBuildingId: UUID,
+    @SerializedName("hostBuilding")
+    val hostBuilding: CampusBuildingModel,
     @SerializedName("capacity")
     val capacity: Int
 )

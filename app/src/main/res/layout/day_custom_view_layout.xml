@@ -2,18 +2,19 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:parentTag="android.widget.RelativeLayout">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/card_day_margin_top"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="@dimen/card_day_margin"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="1dp"
+        android:layout_marginTop="@dimen/card_day_margin"
+        android:layout_marginEnd="@dimen/card_day_margin"
+        android:layout_marginBottom="@dimen/card_day_margin"
         android:clickable="true"
         app:cardCornerRadius="13dp"
         tools:parentTag="androidx.cardview.widget.CardView">
@@ -22,8 +23,7 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/schedule_screen_padding"
-            android:minWidth="@dimen/card_min_width"
+            android:layout_margin="@dimen/card_day_padding"
             android:orientation="vertical">
 
             <TextView

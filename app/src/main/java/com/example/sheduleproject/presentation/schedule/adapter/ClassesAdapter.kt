@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sheduleproject.databinding.ClassCustomViewLayoutBinding
+import com.example.sheduleproject.domain.common.entity.TimeSlotEntity
 import com.example.sheduleproject.domain.schedule.entity.ClassEntity
 import com.example.sheduleproject.presentation.schedule.model.ClassCustomView
 
@@ -17,12 +18,14 @@ class ClassesAdapter(private val onCardClick: () -> Unit) :
             onCardClick()
         }
 
-        fun setupData(classEntity: ClassEntity) {
-            (binding.root as ClassCustomView).setupData(classEntity)
+        fun setupData(classEntity: ClassEntity, timeSlotEntity: TimeSlotEntity) {
+            (binding.root as ClassCustomView).setupData(classEntity, timeSlotEntity)
         }
     }
 
     private var classesList = arrayListOf<ClassEntity>()
+
+    private var timeSlotsList = listOf<TimeSlotEntity>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassesViewHolder {
         val customView = ClassCustomView(parent.context)
@@ -35,7 +38,8 @@ class ClassesAdapter(private val onCardClick: () -> Unit) :
 
     override fun onBindViewHolder(holder: ClassesViewHolder, position: Int) {
         val classEntity = classesList[position]
-        holder.setupData(classEntity)
+        val timeSlotEntity = timeSlotsList[classEntity.timeSlotNumber - 1]
+        holder.setupData(classEntity, timeSlotEntity)
 
         holder.onCardClick {
             onCardClick()
@@ -43,7 +47,18 @@ class ClassesAdapter(private val onCardClick: () -> Unit) :
 
     }
 
+    private fun sortClassesList() {
+        classesList.sortBy { it.timeSlotNumber }
+    }
+
     override fun getItemCount(): Int = classesList.size
 
-    fun setList(list: ArrayList<ClassEntity>) = run { classesList = list }
+    fun setClassesList(list: ArrayList<ClassEntity>) {
+        classesList = list
+        sortClassesList()
+    }
+
+    fun setTimeSlotsList(list: List<TimeSlotEntity>) {
+        timeSlotsList = list
+    }
 }

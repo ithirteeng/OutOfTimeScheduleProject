@@ -5,7 +5,7 @@ import java.util.*
 
 data class EducatorModel(
     @SerializedName("id")
-    var id: UUID?,
+    var id: String?,
     @SerializedName("firstName")
     var firstName: String?,
     @SerializedName("middleName")

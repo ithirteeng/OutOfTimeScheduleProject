@@ -5,7 +5,7 @@ import java.util.*
 
 data class ClassModel(
     @SerializedName("id")
-    var id: UUID?,
+    var id: String?,
     @SerializedName("timeSlotNumber")
     val timeSlotNumber: Int,
     @SerializedName("clusterNumber")
@@ -14,8 +14,6 @@ data class ClassModel(
     val date: String,
     @SerializedName("lectureHall")
     var lectureHall: LectureHallModel?,
-    @SerializedName("campusBuilding")
-    var campusBuilding: CampusBuildingModel?,
     @SerializedName("educator")
     var educator: EducatorModel?,
     @SerializedName("subject")

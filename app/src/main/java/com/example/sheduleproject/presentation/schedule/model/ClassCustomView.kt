@@ -9,10 +9,12 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.sheduleproject.R
 import com.example.sheduleproject.databinding.ClassCustomViewLayoutBinding
+import com.example.sheduleproject.domain.common.entity.TimeSlotEntity
 import com.example.sheduleproject.domain.schedule.entity.ClassEntity
 import com.example.sheduleproject.domain.schedule.entity.ClassType
 import com.example.sheduleproject.domain.schedule.entity.EducatorEntity
 import com.example.sheduleproject.domain.schedule.entity.toClassType
+import com.example.sheduleproject.domain.schedule.utils.DateTimeHelper
 
 
 class ClassCustomView @JvmOverloads constructor(
@@ -22,16 +24,26 @@ class ClassCustomView @JvmOverloads constructor(
 
     private val mainView: View =
         LayoutInflater.from(context).inflate(R.layout.class_custom_view_layout, this)
+
     private val binding = ClassCustomViewLayoutBinding.bind(mainView)
 
-    fun setupData(classEntity: ClassEntity) {
+    private val dateTimeHelper = DateTimeHelper(context)
+
+    fun setupData(classEntity: ClassEntity, timeSlotEntity: TimeSlotEntity) {
         val classType = classEntity.classTypeName.toClassType()
         with(binding) {
-            classNameTextView.text = classEntity.subject?.name
-            lectureHallTextView.text = classEntity.lectureHall?.name
-            educatorNameTextView.text = setupEducatorName(classEntity.educator)
+            timeTextView.text = setCorrectTimePeriod(timeSlotEntity)
+            classNameTextView.text = makeSubjectStringCorrect(classEntity.subject?.name)
+            lectureHallTextView.text = makeStringCorrect(classEntity.lectureHall?.name)
+            educatorNameTextView.text = makeStringCorrect(setupEducatorName(classEntity.educator))
             changeCardStyle(classType)
         }
+    }
+
+    private fun setCorrectTimePeriod(timeSlotEntity: TimeSlotEntity): String {
+        val startTime = dateTimeHelper.getCorrectClassesTime(timeSlotEntity.startTime)
+        val endTime = dateTimeHelper.getCorrectClassesTime(timeSlotEntity.endTime)
+        return "$startTime – $endTime"
     }
 
     private fun changeCardStyle(classType: ClassType) {
@@ -43,8 +55,22 @@ class ClassCustomView @JvmOverloads constructor(
         binding.educatorNameTextView.setTextColor(classColors.textColorId)
     }
 
-    private fun setupEducatorName(educatorEntity: EducatorEntity?): String =
-        "${educatorEntity?.middleName} ${educatorEntity?.firstName} ${educatorEntity?.lastName}"
+    private fun setupEducatorName(educatorEntity: EducatorEntity?): String {
+        return makeStringCorrect(educatorEntity?.middleName) +
+                " ${makeStringCorrect(educatorEntity?.firstName)}" +
+                " ${makeStringCorrect(educatorEntity?.lastName)}"
+    }
+
+    private fun makeStringCorrect(string: String?): String = string ?: ""
+
+    private fun makeSubjectStringCorrect(string: String?): String {
+        return if (string == null || string.isEmpty()) {
+            context.getString(R.string.default_class_text)
+        } else {
+            string
+        }
+    }
+
 
     private fun View.changeViewBackground(colorId: Int) {
         this.background.colorFilter = PorterDuffColorFilter(

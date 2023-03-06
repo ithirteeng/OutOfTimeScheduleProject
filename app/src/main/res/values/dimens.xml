@@ -21,12 +21,12 @@
     <dimen name="schedule_screen_padding">16dp</dimen>
     <dimen name="cluster_text_size">20sp</dimen>
     <dimen name="full_date_text_size">20sp</dimen>
-    <dimen name="day_name_margin">16dp</dimen>
-    <dimen name="day_name_text_size">20sp</dimen>
-    <dimen name="day_number_size">30sp</dimen>
-    <dimen name="card_min_width">45sp</dimen>
-    <dimen name="card_day_margin">16dp</dimen>
-    <dimen name="card_day_margin_top">20dp</dimen>
+    <dimen name="day_name_margin">10dp</dimen>
+    <dimen name="day_name_text_size">10sp</dimen>
+    <dimen name="day_number_size">13sp</dimen>
+    <dimen name="card_day_margin">3dp</dimen>
+    <dimen name="card_day_padding">10dp</dimen>
+    <dimen name="card_day_margin_top">16dp</dimen>
 
     <dimen name="class_card_padding">16dp</dimen>
     <dimen name="class_name_text_size">20sp</dimen>
