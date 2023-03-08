@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.iterator
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.sheduleproject.R
 import com.example.sheduleproject.common.UserType
+import com.example.sheduleproject.data.common.network.interceptor.NoConnectivityException
 import com.example.sheduleproject.databinding.FragmentRegistrationSecondBinding
-import com.example.sheduleproject.domain.entrance.registration.entity.first.RegistrationFirstEntity
+import com.example.sheduleproject.domain.entrance.registration.entity.RegistrationEntity
 import com.example.sheduleproject.domain.entrance.utils.ValidationResult
 import com.example.sheduleproject.presentation.entrance.common.model.setEditTextsInputSpaceFilter
 import com.example.sheduleproject.presentation.entrance.registration.first.RegistrationFirstFragment
@@ -31,16 +34,49 @@ class RegistrationSecondFragment : Fragment() {
         val mainView = inflater.inflate(R.layout.fragment_registration_second, container, false)
         binding = FragmentRegistrationSecondBinding.bind(mainView)
 
-        val data =
-            arguments?.getSerializable(RegistrationFirstFragment.FIRST_REGISTRATION_DATA_KEY) as RegistrationFirstEntity?
-
         setupOnButtonClickFunctions()
-        onBackButtonClick(data)
+        onBackButtonClick()
+        onBackPress()
         setInputFilterToEditTexts()
 
         binding.repeatPasswordEditText.setEditTextHint(getString(R.string.repeat_password))
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setCorrectValuesToFields()
+    }
+
+    private fun setupRegistrationData(): RegistrationEntity {
+        val data = arguments?.getSerializable(
+            RegistrationFirstFragment.REGISTRATION_DATA_KEY
+        ) as RegistrationEntity
+
+        data.accountType = binding.userTypePicker.getCorrectMeaningOfUserType()
+        data.gradeBookNumber = binding.gradeBookEditText.text.toString()
+        data.clusterNumber = binding.clusterNumberEditText.text.toString()
+        data.password = binding.passwordEditText.text().toString()
+
+        return data
+    }
+
+    private fun setCorrectValuesToFields() {
+        val data = arguments?.getSerializable(
+            RegistrationFirstFragment.REGISTRATION_DATA_KEY
+        ) as RegistrationEntity?
+
+        if (!(data?.accountType == null || data.accountType == UserType.DEFAULT)) {
+            binding.userTypePicker.setCorrectType(userType = data.accountType)
+        }
+
+        changeStudentTextsVisibility()
+
+        binding.gradeBookEditText.setText(data?.gradeBookNumber)
+        binding.clusterNumberEditText.setText(data?.clusterNumber)
+        binding.passwordEditText.setText(data?.password)
+        binding.repeatPasswordEditText.setText(data?.password)
     }
 
     private fun setupOnButtonClickFunctions() {
@@ -58,43 +94,80 @@ class RegistrationSecondFragment : Fragment() {
 
     private fun onRegistrationButtonClick() {
         binding.registrationButton.setOnClickListener {
+            binding.registrationButton.isEnabled = false
+            binding.progressBar.visibility = View.VISIBLE
             validateAllFields()
             if (!checkIfFieldsHaveErrors()) {
-                navigateToScheduleFragment()
+
+                viewModel.makePostRegistrationDataRequest(
+                    setupRegistrationData(),
+                    onErrorAppearance = { handleApiErrors(it) }
+                )
+
+                viewModel.getRegistrationResultLiveData().observe(this.viewLifecycleOwner) {
+                    binding.progressBar.visibility = View.GONE
+                    if (it != null) {
+                        viewModel.saveTokenToLocalStorage(it)
+                        navigateToScheduleFragment()
+                    }
+                }
+            } else {
+                binding.progressBar.visibility = View.GONE
+                binding.registrationButton.isEnabled = true
             }
         }
     }
 
-    private fun onBackButtonClick(data: RegistrationFirstEntity?) {
+    private fun onBackButtonClick() {
         binding.backButton.setOnClickListener {
-            setupBundle(data)
-            navigateToFirstRegistrationFragment(setupBundle(data))
+            navigateToFirstRegistrationFragment(setupBundle(setupRegistrationData()))
         }
     }
 
-    private fun setupBundle(data: RegistrationFirstEntity?): Bundle {
+    private fun onBackPress() {
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    navigateToFirstRegistrationFragment(setupBundle(setupRegistrationData()))
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this.viewLifecycleOwner,
+            callback
+        )
+    }
+
+    private fun setupBundle(data: RegistrationEntity?): Bundle {
         val bundle = Bundle()
-        bundle.putSerializable(RegistrationFirstFragment.FIRST_REGISTRATION_DATA_KEY, data)
+        bundle.putSerializable(RegistrationFirstFragment.REGISTRATION_DATA_KEY, data)
         return bundle
     }
 
     private fun onPickerButtonClick() {
         binding.userTypePicker.onPickerButtonsClick {
-            changeIdTextVisibility()
+            changeStudentTextsVisibility()
         }
     }
 
-    private fun changeIdTextVisibility() {
+    private fun changeStudentTextsVisibility() {
         if (binding.userTypePicker.getCorrectMeaningOfUserType() == UserType.STUDENT) {
-            binding.idEditText.visibility = View.VISIBLE
+            binding.gradeBookEditText.visibility = View.VISIBLE
+            binding.clusterNumberEditText.visibility = View.VISIBLE
         } else {
-            binding.idEditText.visibility = View.GONE
-            binding.idErrorTextView.visibility = View.GONE
+            binding.gradeBookEditText.visibility = View.GONE
+            binding.gradleBookErrorTextView.visibility = View.GONE
+            binding.clusterErrorTextView.visibility = View.GONE
+            binding.clusterNumberEditText.visibility = View.GONE
         }
     }
 
     private fun navigateToScheduleFragment() {
-        findNavController().navigate(R.id.action_registrationSecondFragment_to_scheduleFragment)
+        findNavController().currentDestination
+            ?.getAction(R.id.action_registrationSecondFragment_to_scheduleFragment)
+            .run {
+                findNavController().navigate(R.id.action_registrationSecondFragment_to_scheduleFragment)
+            }
+
     }
 
     private fun navigateToFirstRegistrationFragment(bundle: Bundle) {
@@ -102,6 +175,35 @@ class RegistrationSecondFragment : Fragment() {
             R.id.action_registrationSecondFragment_to_registrationFragment,
             bundle
         )
+    }
+
+    private fun handleApiErrors(errorCode: Int) {
+        binding.registrationButton.isEnabled = true
+        when (errorCode) {
+            409 -> {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.registration_409_error_message),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            404 -> {
+                if (binding.clusterNumberEditText.visibility == View.VISIBLE) {
+                    showValidationError(
+                        binding.clusterErrorTextView,
+                        ValidationResult.CLUSTER_ERROR
+                    )
+                }
+            }
+            NoConnectivityException.ERROR_CODE -> {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.internet_connection_error),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+        }
     }
 
     private fun checkIfFieldsHaveErrors(): Boolean {
@@ -115,8 +217,9 @@ class RegistrationSecondFragment : Fragment() {
 
     private fun validateAllFields() {
         validateUserTypePickerField()
-        validateIdNumberField()
+        validateGradleBookNumberField()
         validatePasswordField()
+        validateClusterField()
         validateTwoPasswordsField()
     }
 
@@ -126,6 +229,16 @@ class RegistrationSecondFragment : Fragment() {
             .observe(this.viewLifecycleOwner) {
                 showValidationError(binding.passwordErrorTextView, it)
             }
+    }
+
+    private fun validateClusterField() {
+        if (binding.clusterNumberEditText.visibility == View.VISIBLE) {
+            viewModel
+                .getClusterValidationResultLiveData(binding.clusterNumberEditText.text.toString())
+                .observe(this.viewLifecycleOwner) {
+                    showValidationError(binding.clusterErrorTextView, it)
+                }
+        }
     }
 
     private fun validateUserTypePickerField() {
@@ -138,12 +251,12 @@ class RegistrationSecondFragment : Fragment() {
         showValidationError(binding.pickerErrorTextView, validationResult)
     }
 
-    private fun validateIdNumberField() {
-        if (binding.idEditText.visibility == View.VISIBLE) {
+    private fun validateGradleBookNumberField() {
+        if (binding.gradeBookEditText.visibility == View.VISIBLE) {
             viewModel
-                .getIdNumberValidationResultLiveData(binding.idEditText.text.toString())
+                .getGradleBookNumberValidationResultLiveData(binding.gradeBookEditText.text.toString())
                 .observe(this.viewLifecycleOwner) {
-                    showValidationError(binding.idErrorTextView, it)
+                    showValidationError(binding.gradleBookErrorTextView, it)
                 }
         }
     }
@@ -170,7 +283,8 @@ class RegistrationSecondFragment : Fragment() {
     }
 
     private fun setInputFilterToEditTexts() {
-        binding.idEditText.setEditTextsInputSpaceFilter()
+        binding.gradeBookEditText.setEditTextsInputSpaceFilter()
+        binding.clusterNumberEditText.setEditTextsInputSpaceFilter()
     }
 
 }

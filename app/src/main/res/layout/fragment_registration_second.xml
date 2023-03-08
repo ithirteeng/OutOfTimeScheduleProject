@@ -76,7 +76,7 @@
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/idEditText"
+            android:id="@+id/grade_book_edit_text"
             style="@style/edit_text_style"
             android:layout_marginTop="@dimen/edit_text_margin"
             android:ems="10"
@@ -87,7 +87,24 @@
             tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck" />
 
         <TextView
-            android:id="@+id/idErrorTextView"
+            android:id="@+id/gradleBookErrorTextView"
+            style="@style/error_text_field_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/clusterNumberEditText"
+            style="@style/edit_text_style"
+            android:layout_marginTop="@dimen/edit_text_margin"
+            android:ems="10"
+            android:hint="@string/cluster_number"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:visibility="gone"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/clusterErrorTextView"
             style="@style/error_text_field_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -145,6 +162,16 @@
         app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/progress_bar_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/backButton"

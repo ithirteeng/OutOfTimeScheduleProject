@@ -16,6 +16,7 @@ enum class ValidationResult {
     TWO_PASSWORDS_ERROR,
     EMAIL_ERROR,
     ID_NUMBER_ERROR,
+    CLUSTER_ERROR,
     OK;
 
     fun getErrorString(context: Context) = when (this) {
@@ -31,6 +32,7 @@ enum class ValidationResult {
         PASSWORD_ERROR -> context.getString(R.string.password_error)
         PASSWORD_LENGTH_ERROR -> context.getString(R.string.password_length_error)
         TWO_PASSWORDS_ERROR -> context.getString(R.string.two_passwords_error)
+        CLUSTER_ERROR -> context.getString(R.string.cluster_error)
         else -> context.getString(R.string.id_number_error)
     }
 }

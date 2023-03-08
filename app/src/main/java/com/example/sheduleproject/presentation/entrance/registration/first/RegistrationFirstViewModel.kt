@@ -15,7 +15,7 @@ class RegistrationFirstViewModel(
     private val validateEmailUseCase: ValidateEmailUseCase,
     private val validateNameUseCase: ValidateNameUseCase,
     private val validateSurnameUseCase: ValidateSurnameUseCase,
-    private val validatePatronymicUseCase: ValidatePatronymicUseCase
+    private val validatePatronymicUseCase: ValidatePatronymicUseCase,
 ) : AndroidViewModel(application) {
 
     fun getEmailValidationResultLiveData(string: String): LiveData<ValidationResult> =
