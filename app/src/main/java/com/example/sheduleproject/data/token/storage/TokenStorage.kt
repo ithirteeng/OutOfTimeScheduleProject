@@ -3,7 +3,7 @@ package com.example.sheduleproject.data.token.storage
 import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
-import com.example.sheduleproject.data.common.mapper.model.TokenModel
+import com.example.sheduleproject.data.common.model.TokenModel
 
 class TokenStorage(context: Context) {
     companion object {

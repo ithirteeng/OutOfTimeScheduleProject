@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.sheduleproject.data.common.network.interceptor.NoConnectivityException
-import com.example.sheduleproject.domain.common.entity.TokenEntity
+import com.example.sheduleproject.domain.token.entity.TokenEntity
 import com.example.sheduleproject.domain.entrance.login.entity.LoginEntity
 import com.example.sheduleproject.domain.entrance.login.usecase.PostLoginDataUseCase
 import com.example.sheduleproject.domain.entrance.login.usecase.SaveTokenToLocalStorageUseCase

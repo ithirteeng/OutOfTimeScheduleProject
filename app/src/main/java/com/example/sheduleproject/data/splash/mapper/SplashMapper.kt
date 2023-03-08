@@ -1,6 +1,6 @@
 package com.example.sheduleproject.data.splash.mapper
 
-import com.example.sheduleproject.data.common.mapper.model.TimeSlotModel
+import com.example.sheduleproject.data.common.model.TimeSlotModel
 import com.example.sheduleproject.domain.common.entity.TimeSlotEntity
 
 private fun TimeSlotModel.toEntity(): TimeSlotEntity =

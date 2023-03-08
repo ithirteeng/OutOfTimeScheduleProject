@@ -1,4 +1,4 @@
-package com.example.sheduleproject.domain.common.entity
+package com.example.sheduleproject.domain.token.entity
 
 data class TokenEntity(
     var accessToken: String?,
