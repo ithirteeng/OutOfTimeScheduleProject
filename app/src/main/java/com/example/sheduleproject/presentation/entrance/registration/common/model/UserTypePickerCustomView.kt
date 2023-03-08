@@ -37,12 +37,12 @@ class UserTypePickerCustomView @JvmOverloads constructor(
         return if (isStudentButtonChosen()) {
             UserType.STUDENT
         } else {
-            UserType.TEACHER
+            UserType.EDUCATOR
         }
     }
 
-    fun setCorrectType(gender: Int) {
-        if (gender == 1) {
+    fun setCorrectType(userType: UserType) {
+        if (userType == UserType.STUDENT) {
             buttonsChecker.setStudentState(true)
             buttonsChecker.setTeacherState(false)
             changeStudentButtonBackground(buttonsChecker.getStudentState())

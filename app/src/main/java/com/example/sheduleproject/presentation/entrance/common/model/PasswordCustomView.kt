@@ -31,6 +31,8 @@ class PasswordCustomView @JvmOverloads constructor(
 
     fun clearText() = binding.editTextPassword.setText("")
 
+    fun setText(text: String?) = binding.editTextPassword.setText(text)
+
     fun setEditTextHint(string: String) {
         binding.editTextPassword.hint = string
     }

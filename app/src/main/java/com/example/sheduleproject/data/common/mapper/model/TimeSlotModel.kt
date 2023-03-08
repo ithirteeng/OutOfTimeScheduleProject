@@ -1,4 +1,4 @@
-package com.example.sheduleproject.data.common.model
+package com.example.sheduleproject.data.common.mapper.model
 
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable

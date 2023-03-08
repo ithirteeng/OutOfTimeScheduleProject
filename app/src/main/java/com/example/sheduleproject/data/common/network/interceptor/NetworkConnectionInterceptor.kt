@@ -24,6 +24,11 @@ class NetworkConnectionInterceptor : Interceptor {
 }
 
 class NoConnectivityException : IOException() {
+
+    companion object {
+        const val ERROR_CODE = 1309
+    }
+
     override val message: String
         get() = "No Internet Connection"
 }

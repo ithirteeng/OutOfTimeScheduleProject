@@ -19,6 +19,7 @@
     <string name="password_error">Password must contain at least one upper case letter, one special symbol and one digit</string>
     <string name="password_length_error">Password must contain more than 6 symbols</string>
     <string name="id_number_error">Student ID number must contain only 10 digits</string>
+    <string name="cluster_error">There is no such cluster</string>
     <string name="default_error">default error</string>
     <string name="ok_error">OK</string>
 
@@ -56,7 +57,8 @@
     <string name="patronymic">Patronymic</string>
     <string name="student">Student</string>
     <string name="educator">Educator</string>
-    <string name="document_number">Student ID number</string>
+    <string name="document_number">Grade book number</string>
+    <string name="cluster_number">Cluster number</string>
     <string name="repeat_password">Repeat password</string>
 
     <string name="schedule">Schedule</string>
@@ -68,10 +70,15 @@
     <string name="default_class_time_text">8:45 – 10:20</string>
     <string name="default_date_text">m. 1 january 1970</string>
     <string name="default_day_text">1</string>
-    <string name="default_class_text">Class</string>
+    <string name="default_class_text">Undefined</string>
     <string name="default_educator_text">Educator Educatorovich Educatorov</string>
     <string name="default_lecture_text">214 (2) text</string>
 
+
+    <string name="registration_409_error_message">User with this email already exists!</string>
+    <string name="registration_404_error_message">Cluster number is incorrect</string>
+    <string name="login_400_error_message">Invalid credentials</string>
+    <string name="internet_connection_error">There is no Internet connection</string>
 
 
 </resources>

@@ -1,6 +1,6 @@
 package com.example.sheduleproject.data.splash.datasource
 
-import com.example.sheduleproject.data.common.model.TimeSlotModel
+import com.example.sheduleproject.data.common.mapper.model.TimeSlotModel
 import com.example.sheduleproject.data.splash.api.SplashApi
 
 class SplashDatasourceImpl(

@@ -1,6 +1,6 @@
 package com.example.sheduleproject.data.schedule.mapper
 
-import com.example.sheduleproject.data.common.model.TimeSlotModel
+import com.example.sheduleproject.data.common.mapper.model.TimeSlotModel
 import com.example.sheduleproject.data.schedule.model.*
 import com.example.sheduleproject.domain.common.entity.TimeSlotEntity
 import com.example.sheduleproject.domain.schedule.entity.*

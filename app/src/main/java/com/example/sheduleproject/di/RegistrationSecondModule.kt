@@ -1,8 +1,12 @@
 package com.example.sheduleproject.di
 
-import com.example.sheduleproject.domain.entrance.registration.usecase.second.ValidateIdNumberUseCase
-import com.example.sheduleproject.domain.entrance.registration.usecase.second.ValidatePasswordUseCase
-import com.example.sheduleproject.domain.entrance.registration.usecase.second.ValidateTwoPasswordsUseCase
+import com.example.sheduleproject.data.entrance.registration.datasource.RegistrationDatasource
+import com.example.sheduleproject.data.entrance.registration.datasource.RegistrationDatasourceImpl
+import com.example.sheduleproject.data.entrance.registration.repository.RegistrationRepositoryImpl
+import com.example.sheduleproject.data.token.storage.TokenStorage
+import com.example.sheduleproject.domain.entrance.registration.repository.RegistrationRepository
+import com.example.sheduleproject.domain.entrance.registration.usecase.second.*
+import com.example.sheduleproject.domain.entrance.utils.validator.ClusterValidator
 import com.example.sheduleproject.domain.entrance.utils.validator.IdNumberValidator
 import com.example.sheduleproject.domain.entrance.utils.validator.PasswordValidator
 import com.example.sheduleproject.domain.entrance.utils.validator.TwoPasswordsValidator
@@ -14,17 +18,33 @@ val registrationSecondModule = module {
     single { PasswordValidator() }
     single { TwoPasswordsValidator() }
     single { IdNumberValidator() }
+    single { ClusterValidator() }
+    factory { TokenStorage(context = get()) }
+
+    factory<RegistrationDatasource> { RegistrationDatasourceImpl(api = get()) }
+    factory<RegistrationRepository> {
+        RegistrationRepositoryImpl(
+            datasource = get(),
+            tokenStorage = get()
+        )
+    }
 
     factory { ValidatePasswordUseCase(validator = get()) }
+    factory { ValidateClusterUseCase(validator = get()) }
     factory { ValidateTwoPasswordsUseCase(validator = get()) }
     factory { ValidateIdNumberUseCase(validator = get()) }
+    factory { PostRegistrationDataUseCase(repository = get()) }
+    factory { SaveTokenToLocalStorageUseCase(repository = get()) }
 
     viewModel {
         RegistrationSecondViewModel(
             application = get(),
             validatePasswordUseCase = get(),
             validateTwoPasswordsUseCase = get(),
-            validateIdNumberUseCase = get()
+            validateIdNumberUseCase = get(),
+            validateClusterUseCase = get(),
+            postRegistrationDataUseCase = get(),
+            saveTokenToLocalStorageUseCase = get()
         )
     }
 }
