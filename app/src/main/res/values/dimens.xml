@@ -36,4 +36,6 @@
     <dimen name="class_card_text_margin">2dp</dimen>
 
     <dimen name="error_dialog_margin">16dp</dimen>
+
+    <dimen name="schedule_choice_padding">16dp</dimen>
 </resources>

@@ -13,5 +13,6 @@ val networkModule = module {
     single { setupScheduleApi(retrofit = get()) }
     single { setupLoginApi(retrofit = get()) }
     single { setupRegistrationApi(retrofit = get()) }
+    single { setupScheduleChoiceApi(retrofit = get()) }
 
 }

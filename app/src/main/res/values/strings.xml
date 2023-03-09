@@ -58,6 +58,9 @@
     <string name="patronymic">Patronymic</string>
     <string name="student">Student</string>
     <string name="educator">Educator</string>
+    <string name="group_text">Group</string>
+    <string name="lecture_hall">Lecture Hall</string>
+    <string name="schedule_choice">choose schedule you want to see</string>
     <string name="document_number">Grade book number</string>
     <string name="cluster_number">Cluster number</string>
     <string name="repeat_password">Repeat password</string>
