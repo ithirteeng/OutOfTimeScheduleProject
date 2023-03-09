@@ -55,7 +55,7 @@ class ScheduleTypeChoiceFragment : Fragment() {
 
     private fun setupBundle(scheduleType: ScheduleType): Bundle {
         val bundle = Bundle()
-        bundle.putString(SCHEDULE_TYPE_KEY, scheduleType.toString())
+        bundle.putString(SCHEDULE_TYPE_KEY, scheduleType.getString(requireContext()))
         return bundle
     }
 
