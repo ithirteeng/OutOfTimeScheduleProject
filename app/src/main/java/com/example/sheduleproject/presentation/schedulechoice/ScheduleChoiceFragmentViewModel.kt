@@ -24,7 +24,7 @@ class ScheduleChoiceFragmentViewModel(
 
     private val clustersListLiveData = MutableLiveData<List<ClusterEntity>>()
 
-    private fun makeGetClustersListRequest(onErrorAppearance: (errorCode: Int) -> Unit) {
+    fun makeGetClustersListRequest(onErrorAppearance: (errorCode: Int) -> Unit) {
         viewModelScope.launch {
             getClustersListUseCase()
                 .onSuccess {
@@ -43,7 +43,7 @@ class ScheduleChoiceFragmentViewModel(
 
     private val educatorsListLiveData = MutableLiveData<List<EducatorEntity>>()
 
-    private fun makeGetEducatorsListRequest(onErrorAppearance: (errorCode: Int) -> Unit) {
+    fun makeGetEducatorsListRequest(onErrorAppearance: (errorCode: Int) -> Unit) {
         viewModelScope.launch {
             getEducatorsListUseCase()
                 .onSuccess {
@@ -62,7 +62,7 @@ class ScheduleChoiceFragmentViewModel(
 
     private val lectureHallsListLiveData = MutableLiveData<List<LectureHallEntity>>()
 
-    private fun makeGetLectureHallsListRequest(onErrorAppearance: (errorCode: Int) -> Unit) {
+    fun makeGetLectureHallsListRequest(onErrorAppearance: (errorCode: Int) -> Unit) {
         viewModelScope.launch {
             getLectureHallsListUseCase()
                 .onSuccess {

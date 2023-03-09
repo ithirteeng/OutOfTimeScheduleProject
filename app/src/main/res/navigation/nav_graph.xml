@@ -85,7 +85,8 @@
 		tools:layout="@layout/fragment_schedule_type_choice" >
 		<action
 			android:id="@+id/action_scheduleChoiceFragment_to_scheduleChoiceFragment2"
-			app:destination="@id/scheduleChoiceFragment" />
+			app:destination="@id/scheduleChoiceFragment"
+			app:popUpTo="@id/splashFragment" />
 	</fragment>
 	<fragment
 		android:id="@+id/scheduleChoiceFragment"
@@ -94,7 +95,9 @@
 		tools:layout="@layout/fragment_schedule_choice" >
 		<action
 			android:id="@+id/action_scheduleChoiceFragment2_to_scheduleChoiceFragment"
-			app:destination="@id/scheduleTypeChoiceFragment" />
+			app:destination="@id/scheduleTypeChoiceFragment"
+			app:popUpTo="@id/scheduleTypeChoiceFragment"
+			app:popUpToInclusive="true" />
 		<action
 			android:id="@+id/action_scheduleChoiceFragment2_to_scheduleFragment"
 			app:destination="@id/scheduleFragment" />

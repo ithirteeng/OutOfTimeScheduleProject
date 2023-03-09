@@ -82,6 +82,7 @@
     <string name="registration_409_error_message">User with this email already exists!</string>
     <string name="registration_404_error_message">Cluster number is incorrect</string>
     <string name="login_400_error_message">Invalid credentials</string>
+    <string name="undefined">undefined</string>
     <string name="internet_connection_error">There is no Internet connection</string>
 
 
