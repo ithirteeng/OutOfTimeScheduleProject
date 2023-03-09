@@ -23,9 +23,10 @@ fun setupLoggingInterceptor(): HttpLoggingInterceptor {
 fun setupNetworkConnectionInterceptor(): NetworkConnectionInterceptor =
     NetworkConnectionInterceptor()
 
+
 fun setupOkHttpClient(
     loggingInterceptor: HttpLoggingInterceptor,
-    networkConnectionInterceptor: NetworkConnectionInterceptor
+    networkConnectionInterceptor: NetworkConnectionInterceptor,
 ): OkHttpClient =
     OkHttpClient.Builder()
         .addInterceptor(networkConnectionInterceptor)

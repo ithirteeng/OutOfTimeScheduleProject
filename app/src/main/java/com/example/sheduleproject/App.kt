@@ -16,8 +16,8 @@ class App : Application() {
             androidContext(this@App)
             modules(
                 listOf(
-                    networkModule,
                     tokenModule,
+                    networkModule,
                     loginModule,
                     registrationFirstModule,
                     registrationSecondModule,
