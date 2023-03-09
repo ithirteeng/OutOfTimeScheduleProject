@@ -26,11 +26,25 @@
         android:id="@+id/choiceTypeTextView"
         style="@style/h1_style"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
         android:text="@string/student"
+        app:layout_constraintBottom_toBottomOf="@+id/backButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/backButton" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:paddingTop="2dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/schedule_choice_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/choiceTypeTextView"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/schedule_choice_item" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,8 @@ import com.example.sheduleproject.domain.schedulechoice.repository.ScheduleChoic
 import com.example.sheduleproject.domain.schedulechoice.usecase.GetClustersListUseCase
 import com.example.sheduleproject.domain.schedulechoice.usecase.GetEducatorsListUseCase
 import com.example.sheduleproject.domain.schedulechoice.usecase.GetLectureHallsListUseCase
+import com.example.sheduleproject.presentation.schedulechoice.ScheduleChoiceFragmentViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val scheduleChoiceModule = module {
@@ -16,4 +18,13 @@ val scheduleChoiceModule = module {
     factory { GetLectureHallsListUseCase(repository = get()) }
     factory { GetEducatorsListUseCase(repository = get()) }
     factory { GetClustersListUseCase(repository = get()) }
+
+    viewModel {
+        ScheduleChoiceFragmentViewModel(
+            application = get(),
+            getClustersListUseCase = get(),
+            getEducatorsListUseCase = get(),
+            getLectureHallsListUseCase = get()
+        )
+    }
 }

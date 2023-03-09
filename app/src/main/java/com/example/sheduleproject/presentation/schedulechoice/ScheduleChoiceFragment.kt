@@ -23,4 +23,6 @@ class ScheduleChoiceFragment : Fragment() {
 
         return binding.root
     }
+
+
 }
