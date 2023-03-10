@@ -1,6 +1,6 @@
 package com.example.sheduleproject.data.entrance.login.api
 
-import com.example.sheduleproject.data.common.mapper.model.TokenModel
+import com.example.sheduleproject.data.common.model.TokenModel
 import com.example.sheduleproject.data.entrance.login.model.LoginModel
 import retrofit2.http.Body
 import retrofit2.http.POST

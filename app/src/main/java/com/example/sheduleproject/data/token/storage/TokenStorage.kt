@@ -3,13 +3,13 @@ package com.example.sheduleproject.data.token.storage
 import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
-import com.example.sheduleproject.data.common.mapper.model.TokenModel
+import com.example.sheduleproject.data.common.model.TokenModel
 
 class TokenStorage(context: Context) {
     companion object {
         const val TOKEN_STORAGE_NAME = "token storage name"
-        const val ACCESS_TOKEN_KEY = "access token"
-        const val REFRESH_TOKEN_KEY = "access token"
+        const val ACCESS_TOKEN_KEY = "access_token_key"
+        const val REFRESH_TOKEN_KEY = "refresh_token_key"
     }
 
     private val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
@@ -22,10 +22,10 @@ class TokenStorage(context: Context) {
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
     )
 
-    fun saveTokens(tokenModel: TokenModel) {
+    fun saveTokens(tokenModel: TokenModel?) {
         sharedPreferences.edit()
-            .putString(ACCESS_TOKEN_KEY, tokenModel.accessToken)
-            .putString(REFRESH_TOKEN_KEY, tokenModel.refreshToken)
+            .putString(ACCESS_TOKEN_KEY, tokenModel?.accessToken)
+            .putString(REFRESH_TOKEN_KEY, tokenModel?.refreshToken)
             .apply()
     }
 

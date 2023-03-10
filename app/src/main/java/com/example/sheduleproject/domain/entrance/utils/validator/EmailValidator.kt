@@ -16,5 +16,3 @@ class EmailValidator : Validator {
         }
     }
 }
-
-// androidx.appcompat.widget.AppCompatEditText{2bff62b VFED..CL. ........ 0,42-996,194 #7f0900b9 app:id/emailEditText}
