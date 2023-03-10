@@ -4,11 +4,13 @@ import com.example.sheduleproject.data.common.model.TokenModel
 import com.example.sheduleproject.data.token.storage.TokenStorage
 
 class LocalTokenDatasourceImpl(
-    private val tokenStorage: TokenStorage
+    private val storage: TokenStorage
 ) : LocalTokenDatasource {
-    override fun getToken(): TokenModel =
-        tokenStorage.getTokens()
+    override fun saveToken(tokenModel: TokenModel?) {
+        storage.saveTokens(tokenModel)
+    }
 
-    override fun saveToken(tokenModel: TokenModel) =
-        tokenStorage.saveTokens(tokenModel)
+    override fun getToken(): TokenModel {
+        return storage.getTokens()
+    }
 }
