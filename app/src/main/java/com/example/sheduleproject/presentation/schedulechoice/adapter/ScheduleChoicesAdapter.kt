@@ -13,27 +13,33 @@ import com.example.sheduleproject.domain.schedulechoice.entity.EducatorEntity
 import com.example.sheduleproject.domain.schedulechoice.entity.LectureHallEntity
 
 class ScheduleChoicesAdapter(
-    private val onClick: () -> Unit
+    private val onClick: (data: Any) -> Unit
 ) : RecyclerView.Adapter<ScheduleChoicesAdapter.ScheduleChoicesViewHolder>() {
 
     class ScheduleChoicesViewHolder(view: View) : ViewHolder(view) {
         private val binding = ScheduleChoiceItemBinding.bind(view)
 
         fun onItemClick(onClick: () -> Unit) {
-            binding.root.setOnClickListener { onClick() }
+            binding.button.setOnClickListener {
+                onClick()
+            }
         }
 
         @SuppressLint("SetTextI18n")
         fun bindData(itemData: Any) {
-            if (itemData is ClusterEntity) {
-                binding.textView.text = itemData.number
-            } else if (itemData is EducatorEntity) {
-                val fullName = makeStringCorrect(itemData.lastName) +
-                        " ${makeStringCorrect(itemData.firstName)}" +
-                        " ${makeStringCorrect(itemData.middleName)}"
-                binding.textView.text = fullName
-            } else if (itemData is LectureHallEntity) {
-                binding.textView.text = "${itemData.name}: ${itemData.hostBuilding.name}"
+            when (itemData) {
+                is ClusterEntity -> {
+                    binding.button.text = itemData.number
+                }
+                is EducatorEntity -> {
+                    val fullName = makeStringCorrect(itemData.lastName) +
+                            " ${makeStringCorrect(itemData.firstName)}" +
+                            " ${makeStringCorrect(itemData.middleName)}"
+                    binding.button.text = fullName
+                }
+                is LectureHallEntity -> {
+                    binding.button.text = "${itemData.name}: ${itemData.hostBuilding.name}"
+                }
             }
         }
 
@@ -59,7 +65,7 @@ class ScheduleChoicesAdapter(
     override fun onBindViewHolder(holder: ScheduleChoicesViewHolder, position: Int) {
         val itemData = list[position]
         holder.bindData(itemData)
-        holder.onItemClick(onClick)
+        holder.onItemClick { onClick(itemData) }
     }
 
     override fun getItemCount(): Int = list.size

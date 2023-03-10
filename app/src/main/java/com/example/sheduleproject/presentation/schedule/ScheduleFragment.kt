@@ -9,6 +9,7 @@ import com.example.sheduleproject.R
 import com.example.sheduleproject.databinding.FragmentScheduleBinding
 import com.example.sheduleproject.domain.schedule.utils.DateTimeHelper
 import com.example.sheduleproject.presentation.schedule.adapter.ClassesAdapter
+import com.example.sheduleproject.presentation.schedulechoice.ScheduleChoiceFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScheduleFragment : Fragment() {
@@ -23,6 +24,18 @@ class ScheduleFragment : Fragment() {
         ClassesAdapter {
 
         }
+    }
+
+    private val clusterNumber by lazy {
+        getBundleData(ScheduleChoiceFragment.CLUSTER_KEY)
+    }
+
+    private val educatorId by lazy {
+        getBundleData(ScheduleChoiceFragment.EDUCATOR_KEY)
+    }
+
+    private val lectureHallId by lazy {
+        getBundleData(ScheduleChoiceFragment.LECTURE_HALL_KEY)
     }
 
     override fun onCreateView(
@@ -80,11 +93,17 @@ class ScheduleFragment : Fragment() {
 
     private fun onGettingClassesList(
         startDate: String,
-        endDate: String
+        endDate: String,
+        clusterNumber: String?,
+        educatorId: String?,
+        lectureHallId: String?
     ) {
         viewModel.getClassesListLiveData(
             startDate = startDate,
             endDate = endDate,
+            clusterNumber = clusterNumber,
+            educatorId = educatorId,
+            lectureHallId = lectureHallId,
             onErrorAppeared = { onErrorAppearance() }
         ).observe(this.viewLifecycleOwner) {
             viewModel.saveClassesListToLocalStorage(it)
@@ -114,7 +133,14 @@ class ScheduleFragment : Fragment() {
         onGettingClassesList(
             startDate = binding.weekCustomView.getWeekDatesList()[0],
             endDate = binding.weekCustomView.getWeekDatesList()[6],
+            clusterNumber = clusterNumber,
+            educatorId = educatorId,
+            lectureHallId = lectureHallId
         )
+    }
+
+    private fun getBundleData(key: String): String? {
+        return arguments?.getString(key)
     }
 
     private fun setupFullDateTextView(date: String) {

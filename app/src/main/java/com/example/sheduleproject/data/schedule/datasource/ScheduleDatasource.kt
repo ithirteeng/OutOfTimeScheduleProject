@@ -8,6 +8,7 @@ interface ScheduleDatasource {
         endDate: String?,
         clusterNumber: String?,
         educatorId: String?,
+        lectureHallId: String?,
         dayOfWeek: String?,
         classType: String?
     ): List<ClassModel>

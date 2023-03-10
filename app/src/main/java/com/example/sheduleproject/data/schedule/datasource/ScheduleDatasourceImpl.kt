@@ -11,6 +11,7 @@ class ScheduleDatasourceImpl(
         endDate: String?,
         clusterNumber: String?,
         educatorId: String?,
+        lectureHallId: String?,
         dayOfWeek: String?,
         classType: String?
     ): List<ClassModel> =
@@ -19,6 +20,7 @@ class ScheduleDatasourceImpl(
             endDate = endDate,
             clusterNumber = clusterNumber,
             educatorId = educatorId,
+            lectureHallId = lectureHallId,
             dayOfWeek = dayOfWeek,
             classType = classType
         )
