@@ -33,7 +33,7 @@
 			android:id="@+id/action_loginFragment_to_scheduleFragment"
 			app:destination="@id/scheduleFragment"
 			app:popUpTo="@id/loginFragment"
-			app:popUpToInclusive="true" />
+			app:popUpToInclusive="false" />
 		<action
 			android:id="@+id/action_loginFragment_to_scheduleChoiceFragment"
 			app:destination="@id/scheduleTypeChoiceFragment" />
@@ -60,6 +60,9 @@
 			app:destination="@id/scheduleTypeChoiceFragment"
 			app:popUpTo="@id/loginFragment"
 			app:popUpToInclusive="true" />
+		<action
+			android:id="@+id/action_scheduleFragment_self"
+			app:destination="@id/scheduleFragment" />
 	</fragment>
 	<fragment
 		android:id="@+id/registrationSecondFragment"
@@ -73,7 +76,7 @@
 			android:id="@+id/action_registrationSecondFragment_to_scheduleFragment"
 			app:destination="@id/scheduleFragment"
 			app:popUpTo="@id/loginFragment"
-			app:popUpToInclusive="true" />
+			app:popUpToInclusive="false" />
 		<action
 			android:id="@+id/action_registrationSecondFragment_to_scheduleChoiceFragment"
 			app:destination="@id/scheduleTypeChoiceFragment" />
