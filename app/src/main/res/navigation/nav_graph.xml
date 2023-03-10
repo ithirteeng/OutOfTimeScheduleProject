@@ -100,6 +100,7 @@
 			app:popUpToInclusive="true" />
 		<action
 			android:id="@+id/action_scheduleChoiceFragment2_to_scheduleFragment"
-			app:destination="@id/scheduleFragment" />
+			app:destination="@id/scheduleFragment"
+			app:popUpTo="@id/scheduleTypeChoiceFragment" />
 	</fragment>
 </navigation>
