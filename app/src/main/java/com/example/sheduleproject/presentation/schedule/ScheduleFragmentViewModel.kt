@@ -28,6 +28,7 @@ class ScheduleFragmentViewModel(
         startDate: String?,
         endDate: String?,
         clusterNumber: String?,
+        lectureHallId: String?,
         educatorId: String?,
         dayOfWeek: String?,
         classType: String?,
@@ -39,6 +40,7 @@ class ScheduleFragmentViewModel(
                 endDate = endDate,
                 clusterNumber = clusterNumber,
                 educatorId = educatorId,
+                lectureHallId = lectureHallId,
                 dayOfWeek = dayOfWeek,
                 classType = classType
             ).onSuccess {
@@ -55,6 +57,7 @@ class ScheduleFragmentViewModel(
         endDate: String? = null,
         clusterNumber: String? = null,
         educatorId: String? = null,
+        lectureHallId: String? = null,
         dayOfWeek: String? = null,
         classType: String? = null,
         onErrorAppeared: () -> Unit
@@ -64,6 +67,7 @@ class ScheduleFragmentViewModel(
             endDate = endDate,
             clusterNumber = clusterNumber,
             educatorId = educatorId,
+            lectureHallId = lectureHallId,
             dayOfWeek = dayOfWeek,
             classType = classType,
             onErrorAppeared = onErrorAppeared

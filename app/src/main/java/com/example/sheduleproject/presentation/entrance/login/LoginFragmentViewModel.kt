@@ -14,7 +14,7 @@ import com.example.sheduleproject.domain.entrance.login.usecase.SaveTokenToLocal
 import com.example.sheduleproject.domain.entrance.login.usecase.ValidateEmailUseCase
 import com.example.sheduleproject.domain.entrance.login.usecase.ValidatePasswordUseCase
 import com.example.sheduleproject.domain.entrance.utils.ValidationResult
-import com.example.sheduleproject.presentation.entrance.common.model.SingleEventLiveData
+import com.example.sheduleproject.presentation.common.SingleEventLiveData
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 

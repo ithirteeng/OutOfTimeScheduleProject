@@ -5,6 +5,7 @@ import com.example.sheduleproject.data.common.network.interceptor.NetworkConnect
 import com.example.sheduleproject.data.entrance.login.api.LoginApi
 import com.example.sheduleproject.data.entrance.registration.api.RegistrationApi
 import com.example.sheduleproject.data.schedule.api.ScheduleApi
+import com.example.sheduleproject.data.schedulechoice.api.ScheduleChoiceApi
 import com.example.sheduleproject.data.splash.api.SplashApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -49,3 +50,6 @@ fun setupLoginApi(retrofit: Retrofit): LoginApi = retrofit.create(LoginApi::clas
 
 fun setupRegistrationApi(retrofit: Retrofit): RegistrationApi =
     retrofit.create(RegistrationApi::class.java)
+
+fun setupScheduleChoiceApi(retrofit: Retrofit): ScheduleChoiceApi =
+    retrofit.create(ScheduleChoiceApi::class.java)

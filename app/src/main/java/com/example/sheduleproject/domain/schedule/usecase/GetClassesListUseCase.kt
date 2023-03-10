@@ -12,6 +12,7 @@ class GetClassesListUseCase(
         endDate: String?,
         clusterNumber: String?,
         educatorId: String?,
+        lectureHallId: String?,
         dayOfWeek: String?,
         classType: String?
     ): Result<List<ClassEntity>> {
@@ -19,6 +20,7 @@ class GetClassesListUseCase(
             startDate = startDate,
             endDate = endDate,
             clusterNumber = clusterNumber,
+            lectureHallId = lectureHallId,
             educatorId = educatorId,
             dayOfWeek = dayOfWeek,
             classType = classType

@@ -32,6 +32,7 @@ class ScheduleRepositoryImpl(
         endDate: String?,
         clusterNumber: String?,
         educatorId: String?,
+        lectureHallId: String?,
         dayOfWeek: String?,
         classType: String?
     ): Result<List<ClassEntity>> {
@@ -42,6 +43,7 @@ class ScheduleRepositoryImpl(
                     endDate = endDate,
                     clusterNumber = clusterNumber,
                     educatorId = educatorId,
+                    lectureHallId = lectureHallId,
                     dayOfWeek = dayOfWeek,
                     classType = classType
                 ).toEntitiesList()

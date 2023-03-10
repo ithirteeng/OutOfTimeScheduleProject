@@ -1,4 +1,4 @@
-package com.example.sheduleproject.presentation.entrance.common.model
+package com.example.sheduleproject.presentation.common
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData

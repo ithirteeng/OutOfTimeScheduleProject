@@ -100,8 +100,12 @@ class LoginFragment : Fragment() {
 
     private fun onWithoutButtonClick() {
         binding.withoutButton.setOnClickListener {
-            navigateToScheduleFragment()
+            navigateToScheduleChoiceFragment()
         }
+    }
+
+    private fun navigateToScheduleChoiceFragment() {
+        findNavController().navigate(R.id.action_loginFragment_to_scheduleChoiceFragment)
     }
 
     private fun navigateToRegistrationFragment() {

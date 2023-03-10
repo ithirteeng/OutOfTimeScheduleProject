@@ -18,6 +18,7 @@ interface ScheduleRepository {
         endDate: String?,
         clusterNumber: String?,
         educatorId: String?,
+        lectureHallId: String?,
         dayOfWeek: String?,
         classType: String?
     ): Result<List<ClassEntity>>
