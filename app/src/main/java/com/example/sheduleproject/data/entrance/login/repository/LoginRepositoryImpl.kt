@@ -1,11 +1,11 @@
 package com.example.sheduleproject.data.entrance.login.repository
 
-import com.example.sheduleproject.data.common.mapper.toEntity
-import com.example.sheduleproject.data.common.mapper.toModel
+import com.example.sheduleproject.data.token.mapper.toEntity
+import com.example.sheduleproject.data.token.mapper.toModel
 import com.example.sheduleproject.data.token.storage.TokenStorage
 import com.example.sheduleproject.data.entrance.login.datasource.LoginDatasource
 import com.example.sheduleproject.data.entrance.login.mapper.toModel
-import com.example.sheduleproject.domain.common.entity.TokenEntity
+import com.example.sheduleproject.domain.token.entity.TokenEntity
 import com.example.sheduleproject.domain.entrance.login.entity.LoginEntity
 import com.example.sheduleproject.domain.entrance.login.repository.LoginRepository
 

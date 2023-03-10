@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.sheduleproject.data.common.network.interceptor.NoConnectivityException
-import com.example.sheduleproject.domain.common.entity.TokenEntity
+import com.example.sheduleproject.domain.token.entity.TokenEntity
 import com.example.sheduleproject.domain.entrance.registration.entity.RegistrationEntity
 import com.example.sheduleproject.domain.entrance.registration.usecase.second.*
 import com.example.sheduleproject.domain.entrance.utils.ValidationResult

@@ -3,7 +3,6 @@ package com.example.sheduleproject.di
 import com.example.sheduleproject.data.entrance.registration.datasource.RegistrationDatasource
 import com.example.sheduleproject.data.entrance.registration.datasource.RegistrationDatasourceImpl
 import com.example.sheduleproject.data.entrance.registration.repository.RegistrationRepositoryImpl
-import com.example.sheduleproject.data.token.storage.TokenStorage
 import com.example.sheduleproject.domain.entrance.registration.repository.RegistrationRepository
 import com.example.sheduleproject.domain.entrance.registration.usecase.second.*
 import com.example.sheduleproject.domain.entrance.utils.validator.ClusterValidator
@@ -19,7 +18,6 @@ val registrationSecondModule = module {
     single { TwoPasswordsValidator() }
     single { IdNumberValidator() }
     single { ClusterValidator() }
-    factory { TokenStorage(context = get()) }
 
     factory<RegistrationDatasource> { RegistrationDatasourceImpl(api = get()) }
     factory<RegistrationRepository> {
