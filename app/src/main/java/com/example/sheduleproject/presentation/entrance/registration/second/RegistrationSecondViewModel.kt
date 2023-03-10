@@ -11,7 +11,7 @@ import com.example.sheduleproject.domain.common.entity.TokenEntity
 import com.example.sheduleproject.domain.entrance.registration.entity.RegistrationEntity
 import com.example.sheduleproject.domain.entrance.registration.usecase.second.*
 import com.example.sheduleproject.domain.entrance.utils.ValidationResult
-import com.example.sheduleproject.presentation.entrance.common.model.SingleEventLiveData
+import com.example.sheduleproject.presentation.common.SingleEventLiveData
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 

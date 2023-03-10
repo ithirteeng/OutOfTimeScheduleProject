@@ -20,6 +20,7 @@ class App : Application() {
                     loginModule,
                     registrationFirstModule,
                     registrationSecondModule,
+                    scheduleChoiceModule,
                     scheduleModule,
                     splashModule
                 )

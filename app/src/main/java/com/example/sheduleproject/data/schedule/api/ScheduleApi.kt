@@ -11,6 +11,7 @@ interface ScheduleApi {
         @Query("startDate") startDate: String?,
         @Query("endDate") endDate: String?,
         @Query("clusterNumber") clusterNumber: String?,
+        @Query("lectureHallId") lectureHallId: String?,
         @Query("educatorId") educatorId: String?,
         @Query("dayOfWeek") dayOfWeek: String?,
         @Query("classType") classType: String?

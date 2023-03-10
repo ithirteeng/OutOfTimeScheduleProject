@@ -6,6 +6,7 @@
     <string name="menu_button_description">this is a menu button</string>
     <string name="left_arrow_button_description">previous week</string>
     <string name="right_arrow_button_description">next week</string>
+    <string name="error_picture_description">error appeared</string>
 
     <string name="empty_error">Field mustn\'t be empty!</string>
     <string name="email_error">Email must be in format \"example@domain.com\"</string>
@@ -57,6 +58,9 @@
     <string name="patronymic">Patronymic</string>
     <string name="student">Student</string>
     <string name="educator">Educator</string>
+    <string name="group_text">Group</string>
+    <string name="lecture_hall">Lecture Hall</string>
+    <string name="schedule_choice">choose schedule you want to see</string>
     <string name="document_number">Grade book number</string>
     <string name="cluster_number">Cluster number</string>
     <string name="repeat_password">Repeat password</string>
@@ -78,6 +82,7 @@
     <string name="registration_409_error_message">User with this email already exists!</string>
     <string name="registration_404_error_message">Cluster number is incorrect</string>
     <string name="login_400_error_message">Invalid credentials</string>
+    <string name="undefined">undefined</string>
     <string name="internet_connection_error">There is no Internet connection</string>
 
 
