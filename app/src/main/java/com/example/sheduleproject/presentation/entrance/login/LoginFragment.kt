@@ -97,6 +97,8 @@ class LoginFragment : Fragment() {
 
             if (it.accountType == UserType.STUDENT.getString()) {
                 bundle = BundleHelper.setupBundle(ScheduleType.CLUSTER, it.clusterNumber)
+            } else if (it.accountType == UserType.EDUCATOR.getString() && it.scheduleSelf != null) {
+                bundle = BundleHelper.setupBundle(ScheduleType.EDUCATOR, it.scheduleSelf?.id)
             }
 
             navigateToScheduleFragment(bundle)
