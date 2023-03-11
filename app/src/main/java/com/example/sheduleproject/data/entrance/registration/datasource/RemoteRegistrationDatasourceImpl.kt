@@ -4,9 +4,9 @@ import com.example.sheduleproject.data.common.model.TokenModel
 import com.example.sheduleproject.data.entrance.registration.api.RegistrationApi
 import com.example.sheduleproject.data.entrance.registration.model.RegistrationModel
 
-class RegistrationDatasourceImpl(
+class RemoteRegistrationDatasourceImpl(
     private val api: RegistrationApi
-) : RegistrationDatasource {
+) : RemoteRegistrationDatasource {
     override suspend fun postRegistrationData(registrationModel: RegistrationModel): TokenModel =
         api.postRegistrationData(registrationModel)
 }

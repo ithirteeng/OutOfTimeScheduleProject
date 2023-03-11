@@ -93,15 +93,13 @@ class LoginFragment : Fragment() {
 
     private fun onGettingUserData() {
         viewModel.getUserdataLiveData().observe(this.viewLifecycleOwner) {
-            if (it.accountType == UserType.STUDENT.getString()) {
+            var bundle = Bundle()
 
-                navigateToScheduleFragment(
-                    BundleHelper.setupBundle(
-                        ScheduleType.CLUSTER,
-                        it.clusterNumber
-                    )
-                )
+            if (it.accountType == UserType.STUDENT.getString()) {
+                bundle = BundleHelper.setupBundle(ScheduleType.CLUSTER, it.clusterNumber)
             }
+
+            navigateToScheduleFragment(bundle)
         }
     }
 
