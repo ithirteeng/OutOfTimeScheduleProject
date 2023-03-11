@@ -124,6 +124,7 @@ class RegistrationSecondFragment : Fragment() {
             binding.progressBar.visibility = View.GONE
             if (it != null) {
                 viewModel.saveTokenToLocalStorage(it)
+                viewModel.setIfUserWasAuthorizedFlag(true)
                 if (binding.userTypePicker.getCorrectMeaningOfUserType() == UserType.STUDENT) {
                     navigateToScheduleFragment(setupScheduleBundle())
                 } else {

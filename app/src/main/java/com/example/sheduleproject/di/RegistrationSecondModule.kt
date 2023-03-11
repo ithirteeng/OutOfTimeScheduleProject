@@ -22,7 +22,12 @@ val registrationSecondModule = module {
     single { ClusterValidator() }
 
     factory<RemoteRegistrationDatasource> { RemoteRegistrationDatasourceImpl(api = get()) }
-    factory<LocalRegistrationDatasource> { LocalRegistrationDatasourceImpl(storage = get()) }
+    factory<LocalRegistrationDatasource> {
+        LocalRegistrationDatasourceImpl(
+            tokenStorage = get(),
+            userStorage = get()
+        )
+    }
 
     factory<RegistrationRepository> {
         RegistrationRepositoryImpl(
@@ -37,6 +42,7 @@ val registrationSecondModule = module {
     factory { ValidateIdNumberUseCase(validator = get()) }
     factory { PostRegistrationDataUseCase(repository = get()) }
     factory { SaveTokenToLocalStorageUseCase(repository = get()) }
+    factory { SetUserAuthorizationFlagUseCase(repository = get()) }
 
     viewModel {
         RegistrationSecondViewModel(
@@ -46,7 +52,8 @@ val registrationSecondModule = module {
             validateIdNumberUseCase = get(),
             validateClusterUseCase = get(),
             postRegistrationDataUseCase = get(),
-            saveTokenToLocalStorageUseCase = get()
+            saveTokenToLocalStorageUseCase = get(),
+            setUserAuthorizationFlagUseCase = get()
         )
     }
 }

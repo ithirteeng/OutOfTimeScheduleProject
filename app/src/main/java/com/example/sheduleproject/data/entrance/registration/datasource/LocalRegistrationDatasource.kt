@@ -4,4 +4,6 @@ import com.example.sheduleproject.data.common.model.TokenModel
 
 interface LocalRegistrationDatasource {
     fun saveTokenToLocalStorage(tokenModel: TokenModel)
+
+    fun setIfUserWasAuthorizedFlag(authorizationFlag: Boolean)
 }
