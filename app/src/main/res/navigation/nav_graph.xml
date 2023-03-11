@@ -28,7 +28,9 @@
 		tools:layout="@layout/fragment_login" >
 		<action
 			android:id="@+id/action_loginFragment_to_registrationFragment"
-			app:destination="@id/registrationFragment" />
+			app:destination="@id/registrationFragment"
+			app:popUpTo="@id/loginFragment"
+			app:popUpToInclusive="false" />
 		<action
 			android:id="@+id/action_loginFragment_to_scheduleFragment"
 			app:destination="@id/scheduleFragment"
@@ -45,10 +47,13 @@
 		tools:layout="@layout/fragment_registration" >
 		<action
 			android:id="@+id/action_registrationFragment_to_loginFragment"
-			app:destination="@id/loginFragment" />
+			app:destination="@id/loginFragment"
+			app:popUpTo="@id/loginFragment"
+			app:popUpToInclusive="true" />
 		<action
 			android:id="@+id/action_registrationFragment_to_registrationSecondFragment"
-			app:destination="@id/registrationSecondFragment" />
+			app:destination="@id/registrationSecondFragment"
+			app:popUpTo="@id/registrationSecondFragment" />
 	</fragment>
 	<fragment
 		android:id="@+id/scheduleFragment"
@@ -71,7 +76,8 @@
 		tools:layout="@layout/fragment_registration_second" >
 		<action
 			android:id="@+id/action_registrationSecondFragment_to_registrationFragment"
-			app:destination="@id/registrationFragment" />
+			app:destination="@id/registrationFragment"
+			app:popUpTo="@id/loginFragment" />
 		<action
 			android:id="@+id/action_registrationSecondFragment_to_scheduleFragment"
 			app:destination="@id/scheduleFragment"
