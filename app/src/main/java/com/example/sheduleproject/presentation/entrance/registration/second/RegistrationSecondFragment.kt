@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.iterator
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -20,6 +22,7 @@ import com.example.sheduleproject.domain.entrance.utils.ValidationResult
 import com.example.sheduleproject.presentation.entrance.common.model.setEditTextsInputSpaceFilter
 import com.example.sheduleproject.presentation.entrance.registration.first.RegistrationFirstFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class RegistrationSecondFragment : Fragment() {
 
@@ -121,7 +124,14 @@ class RegistrationSecondFragment : Fragment() {
     private fun onBackButtonClick() {
         binding.backButton.setOnClickListener {
             navigateToFirstRegistrationFragment(setupBundle(setupRegistrationData()))
+            hideKeyboard()
         }
+    }
+
+    private fun hideKeyboard() {
+        val imm =
+            requireContext().getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
     private fun onBackPress() {
