@@ -84,6 +84,7 @@
     <string name="login_400_error_message">Invalid credentials</string>
     <string name="undefined">undefined</string>
     <string name="internet_connection_error">There is no Internet connection</string>
+    <string name="empty_class_list">There aren\'t classes today</string>
 
 
 </resources>

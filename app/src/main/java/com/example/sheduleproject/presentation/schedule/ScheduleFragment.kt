@@ -67,6 +67,7 @@ class ScheduleFragment : Fragment() {
             setupFullDateTextView(binding.weekCustomView.getSelectedDate())
             remakeClassesListRequest()
 
+            binding.emptyListTextView.visibility = View.GONE
             binding.progressBar.visibility = View.VISIBLE
 
         }
@@ -75,6 +76,7 @@ class ScheduleFragment : Fragment() {
             setupFullDateTextView(binding.weekCustomView.getSelectedDate())
             remakeClassesListRequest()
 
+            binding.emptyListTextView.visibility = View.GONE
             binding.progressBar.visibility = View.VISIBLE
         }
     }
@@ -109,6 +111,7 @@ class ScheduleFragment : Fragment() {
             viewModel.saveClassesListToLocalStorage(it)
             getClassesListByDateFromLocalStorage(binding.weekCustomView.getSelectedDate())
             setupOnWeekArrowsClickFunctions()
+
             binding.progressBar.visibility = View.GONE
             binding.swipeToRefresh.isRefreshing = false
         }
@@ -117,6 +120,11 @@ class ScheduleFragment : Fragment() {
     private fun getClassesListByDateFromLocalStorage(date: String) {
         val list = viewModel.getClassesListByDateFromStorage(date)
         classesAdapter.setClassesList(ArrayList(list))
+        if (list.isEmpty()) {
+            binding.emptyListTextView.visibility = View.VISIBLE
+        } else {
+            binding.emptyListTextView.visibility = View.GONE
+        }
 
         binding.recyclerView.adapter = classesAdapter
     }
@@ -130,6 +138,7 @@ class ScheduleFragment : Fragment() {
     }
 
     private fun remakeClassesListRequest() {
+        binding.emptyListTextView.visibility = View.GONE
         onGettingClassesList(
             startDate = binding.weekCustomView.getWeekDatesList()[0],
             endDate = binding.weekCustomView.getWeekDatesList()[6],
