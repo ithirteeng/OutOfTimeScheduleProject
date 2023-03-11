@@ -141,6 +141,7 @@ class LoginFragment : Fragment() {
 
     private fun onWithoutButtonClick() {
         binding.withoutButton.setOnClickListener {
+            viewModel.setIfUserWasAuthorizedFlag(true)
             navigateToScheduleChoiceFragment()
         }
     }
