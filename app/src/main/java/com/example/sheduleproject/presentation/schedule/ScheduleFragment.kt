@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import com.example.sheduleproject.R
 import com.example.sheduleproject.databinding.FragmentScheduleBinding
 import com.example.sheduleproject.domain.schedule.utils.DateTimeHelper
+import com.example.sheduleproject.presentation.common.model.BundleHelper
 import com.example.sheduleproject.presentation.schedule.adapter.ClassesAdapter
-import com.example.sheduleproject.presentation.schedulechoice.ScheduleChoiceFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScheduleFragment : Fragment() {
@@ -27,15 +27,15 @@ class ScheduleFragment : Fragment() {
     }
 
     private val clusterNumber by lazy {
-        getBundleData(ScheduleChoiceFragment.CLUSTER_KEY)
+        getBundleData(BundleHelper.CLUSTER_KEY)
     }
 
     private val educatorId by lazy {
-        getBundleData(ScheduleChoiceFragment.EDUCATOR_KEY)
+        getBundleData(BundleHelper.EDUCATOR_KEY)
     }
 
     private val lectureHallId by lazy {
-        getBundleData(ScheduleChoiceFragment.LECTURE_HALL_KEY)
+        getBundleData(BundleHelper.LECTURE_HALL_KEY)
     }
 
     override fun onCreateView(

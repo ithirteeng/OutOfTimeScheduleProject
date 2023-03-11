@@ -11,10 +11,13 @@ import androidx.core.view.iterator
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.sheduleproject.R
+import com.example.sheduleproject.common.UserType
 import com.example.sheduleproject.data.common.network.interceptor.NoConnectivityException
 import com.example.sheduleproject.databinding.FragmentLoginBinding
 import com.example.sheduleproject.domain.entrance.login.entity.LoginEntity
 import com.example.sheduleproject.domain.entrance.utils.ValidationResult
+import com.example.sheduleproject.presentation.common.model.BundleHelper
+import com.example.sheduleproject.presentation.common.model.ScheduleType
 import com.example.sheduleproject.presentation.entrance.common.model.setEditTextsInputSpaceFilter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -81,8 +84,6 @@ class LoginFragment : Fragment() {
 
             makeGetUserDataRequest()
             onGettingUserData()
-
-            navigateToScheduleFragment()
         }
     }
 
@@ -92,7 +93,15 @@ class LoginFragment : Fragment() {
 
     private fun onGettingUserData() {
         viewModel.getUserdataLiveData().observe(this.viewLifecycleOwner) {
-            Toast.makeText(requireContext(), it.accountType, Toast.LENGTH_SHORT).show()
+            if (it.accountType == UserType.STUDENT.getString()) {
+
+                navigateToScheduleFragment(
+                    BundleHelper.setupBundle(
+                        ScheduleType.CLUSTER,
+                        it.clusterNumber
+                    )
+                )
+            }
         }
     }
 
@@ -138,8 +147,8 @@ class LoginFragment : Fragment() {
         findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
     }
 
-    private fun navigateToScheduleFragment() {
-        findNavController().navigate(R.id.action_loginFragment_to_scheduleFragment)
+    private fun navigateToScheduleFragment(bundle: Bundle) {
+        findNavController().navigate(R.id.action_loginFragment_to_scheduleFragment, bundle)
     }
 
     private fun validateAllFields() {
