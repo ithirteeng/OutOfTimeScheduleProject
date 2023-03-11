@@ -53,6 +53,7 @@ class LoginFragment : Fragment() {
             validateAllFields()
             binding.loginButton.isEnabled = false
             if (!checkIfFieldsHaveErrors()) {
+                binding.progressBar.visibility = View.VISIBLE
                 viewModel.postLoginData(
                     LoginEntity(
                         email = binding.emailEditText.text.toString(),
@@ -72,6 +73,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun onErrorAppearance(errorCode: Int) {
+        binding.progressBar.visibility = View.GONE
         binding.loginButton.isEnabled = true
         when (errorCode) {
             400 -> {
