@@ -22,7 +22,8 @@ class LoginFragmentViewModel(
     private val validatePasswordUseCase: ValidatePasswordUseCase,
     private val postLoginDataUseCase: PostLoginDataUseCase,
     private val saveTokenToLocalStorageUseCase: SaveTokenToLocalStorageUseCase,
-    private val getUserDataUseCase: GetUserDataUseCase
+    private val getUserDataUseCase: GetUserDataUseCase,
+    private val setUserAuthorizationFlagUseCase: SetUserAuthorizationFlagUseCase
 ) : AndroidViewModel(application) {
 
     fun getEmailValidationResultLiveData(string: String): LiveData<ValidationResult> =
@@ -77,6 +78,11 @@ class LoginFragmentViewModel(
     }
 
     fun getUserdataLiveData(): MutableLiveData<UserEntity> = userDataLiveData
+
+
+    fun setIfUserWasAuthorizedFlag(authorizationFlag: Boolean) {
+        setUserAuthorizationFlagUseCase(authorizationFlag)
+    }
 
 
 }

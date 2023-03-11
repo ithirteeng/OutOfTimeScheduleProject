@@ -10,4 +10,6 @@ interface LoginRepository {
     suspend fun getUserData(): Result<UserEntity>
 
     fun saveTokenToLocalStorage(tokenEntity: TokenEntity)
+
+    fun setIfUserWasAuthorizedFlag(authorizationFlag: Boolean)
 }

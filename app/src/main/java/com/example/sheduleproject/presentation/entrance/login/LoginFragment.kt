@@ -102,7 +102,7 @@ class LoginFragment : Fragment() {
             ) {
                 bundle = BundleHelper.setupBundle(ScheduleType.EDUCATOR, it.id)
             }
-
+            viewModel.setIfUserWasAuthorizedFlag(true)
             navigateToScheduleFragment(bundle)
         }
     }

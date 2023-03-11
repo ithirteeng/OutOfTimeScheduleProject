@@ -4,4 +4,6 @@ import com.example.sheduleproject.data.common.model.TokenModel
 
 interface LocalLoginDatasource {
     fun saveTokenToLocalStorage(tokenModel: TokenModel)
+
+    fun setIfUserWasAuthorizedFlag(isAuthorized: Boolean)
 }

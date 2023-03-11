@@ -1,5 +1,6 @@
 package com.example.sheduleproject.di
 
+import com.example.sheduleproject.data.common.storage.UserStorage
 import com.example.sheduleproject.data.entrance.login.datasource.LocalLoginDatasource
 import com.example.sheduleproject.data.entrance.login.datasource.LocalLoginDatasourceImpl
 import com.example.sheduleproject.data.entrance.login.datasource.RemoteLoginDatasource
@@ -17,8 +18,14 @@ val loginModule = module {
     single { EmailValidator() }
     single { PasswordValidator() }
 
+    factory { UserStorage(context = get()) }
     factory<RemoteLoginDatasource> { RemoteLoginDatasourceImpl(loginApi = get()) }
-    factory<LocalLoginDatasource> { LocalLoginDatasourceImpl(tokenStorage = get()) }
+    factory<LocalLoginDatasource> {
+        LocalLoginDatasourceImpl(
+            tokenStorage = get(),
+            userStorage = get()
+        )
+    }
 
     factory<LoginRepository> {
         LoginRepositoryImpl(
@@ -32,6 +39,7 @@ val loginModule = module {
     factory { PostLoginDataUseCase(repository = get()) }
     factory { SaveTokenToLocalStorageUseCase(repository = get()) }
     factory { GetUserDataUseCase(repository = get()) }
+    factory { SetUserAuthorizationFlagUseCase(repository = get()) }
 
     viewModel {
         LoginFragmentViewModel(
@@ -40,7 +48,8 @@ val loginModule = module {
             validatePasswordUseCase = get(),
             postLoginDataUseCase = get(),
             saveTokenToLocalStorageUseCase = get(),
-            getUserDataUseCase = get()
+            getUserDataUseCase = get(),
+            setUserAuthorizationFlagUseCase = get()
         )
     }
 }

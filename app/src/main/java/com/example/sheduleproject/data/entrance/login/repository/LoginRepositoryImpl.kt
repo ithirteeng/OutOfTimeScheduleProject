@@ -34,4 +34,8 @@ class LoginRepositoryImpl(
     override fun saveTokenToLocalStorage(tokenEntity: TokenEntity) {
         localDatasource.saveTokenToLocalStorage(tokenEntity.toModel())
     }
+
+    override fun setIfUserWasAuthorizedFlag(authorizationFlag: Boolean) {
+        localDatasource.setIfUserWasAuthorizedFlag(authorizationFlag)
+    }
 }
