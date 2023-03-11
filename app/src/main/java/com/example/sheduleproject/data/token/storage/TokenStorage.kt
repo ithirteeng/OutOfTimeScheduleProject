@@ -36,6 +36,11 @@ class TokenStorage(context: Context) {
         )
     }
 
+    fun checkUserTokenExistence(): Boolean {
+        val token = sharedPreferences.getString(ACCESS_TOKEN_KEY, null)
+        return token != null
+    }
+
     fun clearTokens() {
         sharedPreferences.edit()
             .remove(ACCESS_TOKEN_KEY)
