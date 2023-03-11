@@ -4,8 +4,8 @@ import com.example.sheduleproject.domain.common.entity.TimeSlotEntity
 import com.example.sheduleproject.domain.splash.repository.SplashRepository
 
 class SaveTimeSlotsListUseCase(
-    private val splashRepository: SplashRepository
+    private val repository: SplashRepository
 ) {
     operator fun invoke(timeSlotsList: List<TimeSlotEntity>) =
-        splashRepository.saveTimeSlotsListToLocalStorage(timeSlotsList)
+        repository.saveTimeSlotsListToLocalStorage(timeSlotsList)
 }

@@ -6,14 +6,16 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.sheduleproject.domain.common.entity.TimeSlotEntity
-import com.example.sheduleproject.domain.splash.usecase.GetTimeslotsListUseCase
-import com.example.sheduleproject.domain.splash.usecase.SaveTimeSlotsListUseCase
+import com.example.sheduleproject.domain.splash.usecase.*
 import kotlinx.coroutines.launch
 
 class SplashFragmentViewModel(
     application: Application,
     private val getTimeslotsListUseCase: GetTimeslotsListUseCase,
-    private val saveTimeSlotsListUseCase: SaveTimeSlotsListUseCase
+    private val saveTimeSlotsListUseCase: SaveTimeSlotsListUseCase,
+    private val checkTokenExistenceUseCase: CheckTokenExistenceUseCase,
+    private val checkIfUserWasAuthorizedUseCase: CheckIfUserWasAuthorizedUseCase,
+    private val getUserDataUseCase: GetUserDataUseCase
 ) : AndroidViewModel(application) {
 
     private val timeSlotsListLiveData = MutableLiveData<List<TimeSlotEntity>?>()

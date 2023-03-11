@@ -4,10 +4,10 @@ import com.example.sheduleproject.domain.common.entity.TimeSlotEntity
 import com.example.sheduleproject.domain.splash.repository.SplashRepository
 
 class GetTimeslotsListUseCase(
-    private val splashRepository: SplashRepository
+    private val repository: SplashRepository
 ) {
     suspend operator fun invoke(): Result<List<TimeSlotEntity>?> =
-        splashRepository.getTimeSlotsList()
+        repository.getTimeSlotsList()
 
 
 }
