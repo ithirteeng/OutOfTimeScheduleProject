@@ -97,12 +97,18 @@ class LoginFragment : Fragment() {
 
             if (it.accountType == UserType.STUDENT.getString()) {
                 bundle = BundleHelper.setupBundle(ScheduleType.CLUSTER, it.clusterNumber)
-            } else if (it.accountType == UserType.EDUCATOR.getString() && it.scheduleSelf != null) {
-                bundle = BundleHelper.setupBundle(ScheduleType.EDUCATOR, it.scheduleSelf?.id)
+            } else if (it.accountType == UserType.EDUCATOR.getString() &&
+                checkIfEducatorIsVerified(it.verifiedRoles)
+            ) {
+                bundle = BundleHelper.setupBundle(ScheduleType.EDUCATOR, it.id)
             }
 
             navigateToScheduleFragment(bundle)
         }
+    }
+
+    private fun checkIfEducatorIsVerified(verifiedRoles: List<String>?): Boolean {
+        return verifiedRoles?.contains(UserType.EDUCATOR.getString()) ?: false
     }
 
     private fun onErrorAppearance(errorCode: Int) {

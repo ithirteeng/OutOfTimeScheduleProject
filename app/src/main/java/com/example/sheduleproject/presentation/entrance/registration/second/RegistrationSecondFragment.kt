@@ -19,6 +19,8 @@ import com.example.sheduleproject.data.common.network.interceptor.NoConnectivity
 import com.example.sheduleproject.databinding.FragmentRegistrationSecondBinding
 import com.example.sheduleproject.domain.entrance.registration.entity.RegistrationEntity
 import com.example.sheduleproject.domain.entrance.utils.ValidationResult
+import com.example.sheduleproject.presentation.common.model.BundleHelper
+import com.example.sheduleproject.presentation.common.model.ScheduleType
 import com.example.sheduleproject.presentation.entrance.common.model.setEditTextsInputSpaceFilter
 import com.example.sheduleproject.presentation.entrance.registration.first.RegistrationFirstFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -101,19 +103,8 @@ class RegistrationSecondFragment : Fragment() {
             binding.progressBar.visibility = View.VISIBLE
             validateAllFields()
             if (!checkIfFieldsHaveErrors()) {
-
-                viewModel.makePostRegistrationDataRequest(
-                    setupRegistrationData(),
-                    onErrorAppearance = { handleApiErrors(it) }
-                )
-
-                viewModel.getRegistrationResultLiveData().observe(this.viewLifecycleOwner) {
-                    binding.progressBar.visibility = View.GONE
-                    if (it != null) {
-                        viewModel.saveTokenToLocalStorage(it)
-                        navigateToScheduleFragment()
-                    }
-                }
+                makePostRegistrationRequest()
+                onGettingRegistrationLiveData()
             } else {
                 binding.progressBar.visibility = View.GONE
                 binding.registrationButton.isEnabled = true
@@ -121,9 +112,42 @@ class RegistrationSecondFragment : Fragment() {
         }
     }
 
+    private fun makePostRegistrationRequest() {
+        viewModel.makePostRegistrationDataRequest(
+            setupRegistrationData(),
+            onErrorAppearance = { handleApiErrors(it) }
+        )
+    }
+
+    private fun onGettingRegistrationLiveData() {
+        viewModel.getRegistrationResultLiveData().observe(this.viewLifecycleOwner) {
+            binding.progressBar.visibility = View.GONE
+            if (it != null) {
+                viewModel.saveTokenToLocalStorage(it)
+                if (binding.userTypePicker.getCorrectMeaningOfUserType() == UserType.STUDENT) {
+                    navigateToScheduleFragment(setupScheduleBundle())
+                } else {
+                    navigateToChoiceScheduleTypeFragment()
+                }
+            }
+        }
+    }
+
+    private fun setupScheduleBundle(): Bundle {
+        val userType = binding.userTypePicker.getCorrectMeaningOfUserType()
+        return if (userType == UserType.STUDENT) {
+            BundleHelper.setupBundle(
+                ScheduleType.CLUSTER,
+                binding.clusterNumberEditText.text.toString()
+            )
+        } else {
+            Bundle()
+        }
+    }
+
     private fun onBackButtonClick() {
         binding.backButton.setOnClickListener {
-            navigateToFirstRegistrationFragment(setupBundle(setupRegistrationData()))
+            navigateToFirstRegistrationFragment(setupRegistrationBundle(setupRegistrationData()))
             hideKeyboard()
         }
     }
@@ -138,7 +162,11 @@ class RegistrationSecondFragment : Fragment() {
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    navigateToFirstRegistrationFragment(setupBundle(setupRegistrationData()))
+                    navigateToFirstRegistrationFragment(
+                        setupRegistrationBundle(
+                            setupRegistrationData()
+                        )
+                    )
                 }
             }
         requireActivity().onBackPressedDispatcher.addCallback(
@@ -147,7 +175,7 @@ class RegistrationSecondFragment : Fragment() {
         )
     }
 
-    private fun setupBundle(data: RegistrationEntity?): Bundle {
+    private fun setupRegistrationBundle(data: RegistrationEntity?): Bundle {
         val bundle = Bundle()
         bundle.putSerializable(RegistrationFirstFragment.REGISTRATION_DATA_KEY, data)
         return bundle
@@ -171,13 +199,15 @@ class RegistrationSecondFragment : Fragment() {
         }
     }
 
-    private fun navigateToScheduleFragment() {
-        findNavController().currentDestination
-            ?.getAction(R.id.action_registrationSecondFragment_to_scheduleFragment)
-            .run {
-                findNavController().navigate(R.id.action_registrationSecondFragment_to_scheduleFragment)
-            }
+    private fun navigateToScheduleFragment(bundle: Bundle) {
+        findNavController().navigate(
+            R.id.action_registrationSecondFragment_to_scheduleFragment,
+            bundle
+        )
+    }
 
+    private fun navigateToChoiceScheduleTypeFragment() {
+        findNavController().navigate(R.id.action_registrationSecondFragment_to_scheduleTypeChoiceFragment)
     }
 
     private fun navigateToFirstRegistrationFragment(bundle: Bundle) {
