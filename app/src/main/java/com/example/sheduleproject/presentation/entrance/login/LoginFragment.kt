@@ -11,10 +11,13 @@ import androidx.core.view.iterator
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.sheduleproject.R
+import com.example.sheduleproject.common.UserType
 import com.example.sheduleproject.data.common.network.interceptor.NoConnectivityException
 import com.example.sheduleproject.databinding.FragmentLoginBinding
 import com.example.sheduleproject.domain.entrance.login.entity.LoginEntity
 import com.example.sheduleproject.domain.entrance.utils.ValidationResult
+import com.example.sheduleproject.presentation.common.model.BundleHelper
+import com.example.sheduleproject.presentation.common.model.ScheduleType
 import com.example.sheduleproject.presentation.entrance.common.model.setEditTextsInputSpaceFilter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -53,25 +56,63 @@ class LoginFragment : Fragment() {
             validateAllFields()
             binding.loginButton.isEnabled = false
             if (!checkIfFieldsHaveErrors()) {
-                viewModel.postLoginData(
-                    LoginEntity(
-                        email = binding.emailEditText.text.toString(),
-                        password = binding.passwordEditText.text().toString()
-                    ),
-                    onErrorAppearance = { onErrorAppearance(it) }
-                )
+                binding.progressBar.visibility = View.VISIBLE
 
-                viewModel.getTokenLiveData().observe(this.viewLifecycleOwner) {
-                    viewModel.saveTokenToLocalStorage(it)
-                    navigateToScheduleFragment()
-                }
+                makePostLoginDataRequest()
+                onGettingTokenLiveData()
+
+
             } else {
                 binding.loginButton.isEnabled = true
             }
         }
     }
 
+    private fun makePostLoginDataRequest() {
+        viewModel.postLoginData(
+            LoginEntity(
+                email = binding.emailEditText.text.toString(),
+                password = binding.passwordEditText.text().toString()
+            ),
+            onErrorAppearance = { onErrorAppearance(it) }
+        )
+    }
+
+    private fun onGettingTokenLiveData() {
+        viewModel.getTokenLiveData().observe(this.viewLifecycleOwner) {
+            viewModel.saveTokenToLocalStorage(it)
+
+            makeGetUserDataRequest()
+            onGettingUserData()
+        }
+    }
+
+    private fun makeGetUserDataRequest() {
+        viewModel.getUserData { onErrorAppearance(it) }
+    }
+
+    private fun onGettingUserData() {
+        viewModel.getUserdataLiveData().observe(this.viewLifecycleOwner) {
+            var bundle = Bundle()
+
+            if (it.accountType == UserType.STUDENT.getString()) {
+                bundle = BundleHelper.setupBundle(ScheduleType.CLUSTER, it.clusterNumber)
+            } else if (it.accountType == UserType.EDUCATOR.getString() &&
+                checkIfEducatorIsVerified(it.verifiedRoles)
+            ) {
+                bundle = BundleHelper.setupBundle(ScheduleType.EDUCATOR, it.id)
+            }
+            viewModel.setIfUserWasAuthorizedFlag(true)
+            navigateToScheduleFragment(bundle)
+        }
+    }
+
+    private fun checkIfEducatorIsVerified(verifiedRoles: List<String>?): Boolean {
+        return verifiedRoles?.contains(UserType.EDUCATOR.getString()) ?: false
+    }
+
     private fun onErrorAppearance(errorCode: Int) {
+        binding.progressBar.visibility = View.GONE
         binding.loginButton.isEnabled = true
         when (errorCode) {
             400 -> {
@@ -100,6 +141,7 @@ class LoginFragment : Fragment() {
 
     private fun onWithoutButtonClick() {
         binding.withoutButton.setOnClickListener {
+            viewModel.setIfUserWasAuthorizedFlag(true)
             navigateToScheduleChoiceFragment()
         }
     }
@@ -112,8 +154,8 @@ class LoginFragment : Fragment() {
         findNavController().navigate(R.id.action_loginFragment_to_registrationFragment)
     }
 
-    private fun navigateToScheduleFragment() {
-        findNavController().navigate(R.id.action_loginFragment_to_scheduleFragment)
+    private fun navigateToScheduleFragment(bundle: Bundle) {
+        findNavController().navigate(R.id.action_loginFragment_to_scheduleFragment, bundle)
     }
 
     private fun validateAllFields() {

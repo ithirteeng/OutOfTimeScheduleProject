@@ -7,10 +7,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.sheduleproject.data.common.network.interceptor.NoConnectivityException
-import com.example.sheduleproject.domain.token.entity.TokenEntity
 import com.example.sheduleproject.domain.entrance.registration.entity.RegistrationEntity
 import com.example.sheduleproject.domain.entrance.registration.usecase.second.*
 import com.example.sheduleproject.domain.entrance.utils.ValidationResult
+import com.example.sheduleproject.domain.token.entity.TokenEntity
 import com.example.sheduleproject.presentation.common.SingleEventLiveData
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -22,7 +22,8 @@ class RegistrationSecondViewModel(
     private val validateIdNumberUseCase: ValidateIdNumberUseCase,
     private val validateClusterUseCase: ValidateClusterUseCase,
     private val postRegistrationDataUseCase: PostRegistrationDataUseCase,
-    private val saveTokenToLocalStorageUseCase: SaveTokenToLocalStorageUseCase
+    private val saveTokenToLocalStorageUseCase: SaveTokenToLocalStorageUseCase,
+    private val setUserAuthorizationFlagUseCase: SetUserAuthorizationFlagUseCase
 ) : AndroidViewModel(application) {
 
     fun getPasswordValidationResultLiveData(string: String): LiveData<ValidationResult> =
@@ -66,4 +67,7 @@ class RegistrationSecondViewModel(
 
     fun saveTokenToLocalStorage(tokenEntity: TokenEntity) =
         saveTokenToLocalStorageUseCase(tokenEntity)
+
+    fun setIfUserWasAuthorizedFlag(authorizationFlag: Boolean) =
+        setUserAuthorizationFlagUseCase(authorizationFlag)
 }

@@ -7,7 +7,7 @@ data class RegistrationEntity(
     var lastName: String?,
     var firstName: String?,
     var middleName: String?,
-    var accountType: UserType,
+    var accountType: UserType?,
     var gradeBookNumber: String?,
     var password: String?,
     var clusterNumber: String?

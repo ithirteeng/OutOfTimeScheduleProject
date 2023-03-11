@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.sheduleproject.R
 import com.example.sheduleproject.databinding.FragmentScheduleTypeChoiceBinding
-import com.example.sheduleproject.presentation.schedulechoice.model.ScheduleType
+import com.example.sheduleproject.presentation.common.model.ScheduleType
 
 class ScheduleTypeChoiceFragment : Fragment() {
 
@@ -43,7 +43,7 @@ class ScheduleTypeChoiceFragment : Fragment() {
 
     private fun onGroupButtonClick() {
         binding.groupButton.setOnClickListener {
-            navigateToSecondFragment(setupBundle(ScheduleType.GROUP))
+            navigateToSecondFragment(setupBundle(ScheduleType.CLUSTER))
         }
     }
 

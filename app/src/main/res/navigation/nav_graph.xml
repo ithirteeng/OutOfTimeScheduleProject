@@ -28,12 +28,14 @@
 		tools:layout="@layout/fragment_login" >
 		<action
 			android:id="@+id/action_loginFragment_to_registrationFragment"
-			app:destination="@id/registrationFragment" />
+			app:destination="@id/registrationFragment"
+			app:popUpTo="@id/loginFragment"
+			app:popUpToInclusive="false" />
 		<action
 			android:id="@+id/action_loginFragment_to_scheduleFragment"
 			app:destination="@id/scheduleFragment"
 			app:popUpTo="@id/loginFragment"
-			app:popUpToInclusive="true" />
+			app:popUpToInclusive="false" />
 		<action
 			android:id="@+id/action_loginFragment_to_scheduleChoiceFragment"
 			app:destination="@id/scheduleTypeChoiceFragment" />
@@ -45,10 +47,13 @@
 		tools:layout="@layout/fragment_registration" >
 		<action
 			android:id="@+id/action_registrationFragment_to_loginFragment"
-			app:destination="@id/loginFragment" />
+			app:destination="@id/loginFragment"
+			app:popUpTo="@id/loginFragment"
+			app:popUpToInclusive="true" />
 		<action
 			android:id="@+id/action_registrationFragment_to_registrationSecondFragment"
-			app:destination="@id/registrationSecondFragment" />
+			app:destination="@id/registrationSecondFragment"
+			app:popUpTo="@id/registrationSecondFragment" />
 	</fragment>
 	<fragment
 		android:id="@+id/scheduleFragment"
@@ -60,6 +65,9 @@
 			app:destination="@id/scheduleTypeChoiceFragment"
 			app:popUpTo="@id/loginFragment"
 			app:popUpToInclusive="true" />
+		<action
+			android:id="@+id/action_scheduleFragment_self"
+			app:destination="@id/scheduleFragment" />
 	</fragment>
 	<fragment
 		android:id="@+id/registrationSecondFragment"
@@ -68,15 +76,21 @@
 		tools:layout="@layout/fragment_registration_second" >
 		<action
 			android:id="@+id/action_registrationSecondFragment_to_registrationFragment"
-			app:destination="@id/registrationFragment" />
+			app:destination="@id/registrationFragment"
+			app:popUpTo="@id/loginFragment" />
 		<action
 			android:id="@+id/action_registrationSecondFragment_to_scheduleFragment"
 			app:destination="@id/scheduleFragment"
 			app:popUpTo="@id/loginFragment"
-			app:popUpToInclusive="true" />
+			app:popUpToInclusive="false" />
 		<action
 			android:id="@+id/action_registrationSecondFragment_to_scheduleChoiceFragment"
 			app:destination="@id/scheduleTypeChoiceFragment" />
+		<action
+			android:id="@+id/action_registrationSecondFragment_to_scheduleTypeChoiceFragment"
+			app:destination="@id/scheduleTypeChoiceFragment"
+			app:popUpTo="@id/loginFragment"
+			app:popUpToInclusive="false" />
 	</fragment>
 	<fragment
 		android:id="@+id/scheduleTypeChoiceFragment"
@@ -87,6 +101,10 @@
 			android:id="@+id/action_scheduleChoiceFragment_to_scheduleChoiceFragment2"
 			app:destination="@id/scheduleChoiceFragment"
 			app:popUpTo="@id/splashFragment" />
+		<action
+			android:id="@+id/action_scheduleTypeChoiceFragment_to_loginFragment"
+			app:destination="@id/loginFragment"
+			app:popUpTo="@id/loginFragment" />
 	</fragment>
 	<fragment
 		android:id="@+id/scheduleChoiceFragment"

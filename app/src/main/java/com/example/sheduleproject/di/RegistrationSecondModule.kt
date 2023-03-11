@@ -1,7 +1,9 @@
 package com.example.sheduleproject.di
 
-import com.example.sheduleproject.data.entrance.registration.datasource.RegistrationDatasource
-import com.example.sheduleproject.data.entrance.registration.datasource.RegistrationDatasourceImpl
+import com.example.sheduleproject.data.entrance.registration.datasource.LocalRegistrationDatasource
+import com.example.sheduleproject.data.entrance.registration.datasource.LocalRegistrationDatasourceImpl
+import com.example.sheduleproject.data.entrance.registration.datasource.RemoteRegistrationDatasource
+import com.example.sheduleproject.data.entrance.registration.datasource.RemoteRegistrationDatasourceImpl
 import com.example.sheduleproject.data.entrance.registration.repository.RegistrationRepositoryImpl
 import com.example.sheduleproject.domain.entrance.registration.repository.RegistrationRepository
 import com.example.sheduleproject.domain.entrance.registration.usecase.second.*
@@ -19,11 +21,18 @@ val registrationSecondModule = module {
     single { IdNumberValidator() }
     single { ClusterValidator() }
 
-    factory<RegistrationDatasource> { RegistrationDatasourceImpl(api = get()) }
+    factory<RemoteRegistrationDatasource> { RemoteRegistrationDatasourceImpl(api = get()) }
+    factory<LocalRegistrationDatasource> {
+        LocalRegistrationDatasourceImpl(
+            tokenStorage = get(),
+            userStorage = get()
+        )
+    }
+
     factory<RegistrationRepository> {
         RegistrationRepositoryImpl(
-            datasource = get(),
-            tokenStorage = get()
+            remoteDatasource = get(),
+            localDatasource = get()
         )
     }
 
@@ -33,6 +42,7 @@ val registrationSecondModule = module {
     factory { ValidateIdNumberUseCase(validator = get()) }
     factory { PostRegistrationDataUseCase(repository = get()) }
     factory { SaveTokenToLocalStorageUseCase(repository = get()) }
+    factory { SetUserAuthorizationFlagUseCase(repository = get()) }
 
     viewModel {
         RegistrationSecondViewModel(
@@ -42,7 +52,8 @@ val registrationSecondModule = module {
             validateIdNumberUseCase = get(),
             validateClusterUseCase = get(),
             postRegistrationDataUseCase = get(),
-            saveTokenToLocalStorageUseCase = get()
+            saveTokenToLocalStorageUseCase = get(),
+            setUserAuthorizationFlagUseCase = get()
         )
     }
 }
