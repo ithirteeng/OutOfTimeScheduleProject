@@ -13,8 +13,9 @@ import com.example.sheduleproject.databinding.FragmentScheduleChoiceBinding
 import com.example.sheduleproject.domain.schedulechoice.entity.ClusterEntity
 import com.example.sheduleproject.domain.schedulechoice.entity.EducatorEntity
 import com.example.sheduleproject.domain.schedulechoice.entity.LectureHallEntity
+import com.example.sheduleproject.presentation.common.model.BundleHelper
+import com.example.sheduleproject.presentation.common.model.ScheduleType
 import com.example.sheduleproject.presentation.schedulechoice.adapter.ScheduleChoicesAdapter
-import com.example.sheduleproject.presentation.schedulechoice.model.ScheduleType
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScheduleChoiceFragment : Fragment() {
@@ -22,12 +23,6 @@ class ScheduleChoiceFragment : Fragment() {
     private lateinit var binding: FragmentScheduleChoiceBinding
 
     private val viewModel: ScheduleChoiceFragmentViewModel by viewModel()
-
-    companion object {
-        const val CLUSTER_KEY = "cluster bundle key"
-        const val EDUCATOR_KEY = "educator bundle key"
-        const val LECTURE_HALL_KEY = "lecture hall bundle key"
-    }
 
     private val scheduleChoicesAdapter by lazy {
         ScheduleChoicesAdapter {
@@ -65,27 +60,20 @@ class ScheduleChoiceFragment : Fragment() {
     }
 
     private fun setupBundle(data: Any): Bundle {
-        val bundle = Bundle()
-
-        when (data) {
+        return when (data) {
             is ClusterEntity -> {
-                bundle.putString(CLUSTER_KEY, data.number)
-                bundle.putString(LECTURE_HALL_KEY, null)
-                bundle.putString(EDUCATOR_KEY, null)
+                BundleHelper.setupBundle(ScheduleType.CLUSTER, data.number)
             }
             is EducatorEntity -> {
-                bundle.putString(CLUSTER_KEY, null)
-                bundle.putString(LECTURE_HALL_KEY, null)
-                bundle.putString(EDUCATOR_KEY, data.id)
+                BundleHelper.setupBundle(ScheduleType.EDUCATOR, data.id)
             }
             is LectureHallEntity -> {
-                bundle.putString(CLUSTER_KEY, null)
-                bundle.putString(LECTURE_HALL_KEY, data.id)
-                bundle.putString(EDUCATOR_KEY, null)
+                BundleHelper.setupBundle(ScheduleType.LECTURE_HALL, data.id)
+            }
+            else -> {
+                Bundle()
             }
         }
-
-        return bundle
     }
 
     private fun navigateToScheduleFragment(bundle: Bundle) {
@@ -101,7 +89,7 @@ class ScheduleChoiceFragment : Fragment() {
 
     private fun makeCorrectRequest(choiceType: String) {
         when (choiceType) {
-            ScheduleType.GROUP.getString(requireContext()) -> {
+            ScheduleType.CLUSTER.getString(requireContext()) -> {
                 viewModel.makeGetClustersListRequest { handleApiError(it) }
             }
             ScheduleType.EDUCATOR.getString(requireContext()) -> {

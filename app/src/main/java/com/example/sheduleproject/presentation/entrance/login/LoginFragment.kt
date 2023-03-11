@@ -54,21 +54,45 @@ class LoginFragment : Fragment() {
             binding.loginButton.isEnabled = false
             if (!checkIfFieldsHaveErrors()) {
                 binding.progressBar.visibility = View.VISIBLE
-                viewModel.postLoginData(
-                    LoginEntity(
-                        email = binding.emailEditText.text.toString(),
-                        password = binding.passwordEditText.text().toString()
-                    ),
-                    onErrorAppearance = { onErrorAppearance(it) }
-                )
 
-                viewModel.getTokenLiveData().observe(this.viewLifecycleOwner) {
-                    viewModel.saveTokenToLocalStorage(it)
-                    navigateToScheduleFragment()
-                }
+                makePostLoginDataRequest()
+                onGettingTokenLiveData()
+
+
             } else {
                 binding.loginButton.isEnabled = true
             }
+        }
+    }
+
+    private fun makePostLoginDataRequest() {
+        viewModel.postLoginData(
+            LoginEntity(
+                email = binding.emailEditText.text.toString(),
+                password = binding.passwordEditText.text().toString()
+            ),
+            onErrorAppearance = { onErrorAppearance(it) }
+        )
+    }
+
+    private fun onGettingTokenLiveData() {
+        viewModel.getTokenLiveData().observe(this.viewLifecycleOwner) {
+            viewModel.saveTokenToLocalStorage(it)
+
+            makeGetUserDataRequest()
+            onGettingUserData()
+
+            navigateToScheduleFragment()
+        }
+    }
+
+    private fun makeGetUserDataRequest() {
+        viewModel.getUserData { onErrorAppearance(it) }
+    }
+
+    private fun onGettingUserData() {
+        viewModel.getUserdataLiveData().observe(this.viewLifecycleOwner) {
+            Toast.makeText(requireContext(), it.accountType, Toast.LENGTH_SHORT).show()
         }
     }
 

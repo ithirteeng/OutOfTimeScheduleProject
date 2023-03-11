@@ -1,13 +1,12 @@
 package com.example.sheduleproject.di
 
-import com.example.sheduleproject.data.entrance.login.datasource.LoginDatasource
-import com.example.sheduleproject.data.entrance.login.datasource.LoginDatasourceImpl
+import com.example.sheduleproject.data.entrance.login.datasource.LocalLoginDatasource
+import com.example.sheduleproject.data.entrance.login.datasource.LocalLoginDatasourceImpl
+import com.example.sheduleproject.data.entrance.login.datasource.RemoteLoginDatasource
+import com.example.sheduleproject.data.entrance.login.datasource.RemoteLoginDatasourceImpl
 import com.example.sheduleproject.data.entrance.login.repository.LoginRepositoryImpl
 import com.example.sheduleproject.domain.entrance.login.repository.LoginRepository
-import com.example.sheduleproject.domain.entrance.login.usecase.PostLoginDataUseCase
-import com.example.sheduleproject.domain.entrance.login.usecase.SaveTokenToLocalStorageUseCase
-import com.example.sheduleproject.domain.entrance.login.usecase.ValidateEmailUseCase
-import com.example.sheduleproject.domain.entrance.login.usecase.ValidatePasswordUseCase
+import com.example.sheduleproject.domain.entrance.login.usecase.*
 import com.example.sheduleproject.domain.entrance.utils.validator.EmailValidator
 import com.example.sheduleproject.domain.entrance.utils.validator.PasswordValidator
 import com.example.sheduleproject.presentation.entrance.login.LoginFragmentViewModel
@@ -18,11 +17,13 @@ val loginModule = module {
     single { EmailValidator() }
     single { PasswordValidator() }
 
-    factory<LoginDatasource> { LoginDatasourceImpl(loginApi = get()) }
+    factory<RemoteLoginDatasource> { RemoteLoginDatasourceImpl(loginApi = get()) }
+    factory<LocalLoginDatasource> { LocalLoginDatasourceImpl(tokenStorage = get()) }
+
     factory<LoginRepository> {
         LoginRepositoryImpl(
-            datasource = get(),
-            tokenStorage = get()
+            remoteDatasource = get(),
+            localDatasource = get()
         )
     }
 
@@ -30,6 +31,7 @@ val loginModule = module {
     factory { ValidatePasswordUseCase(validator = get()) }
     factory { PostLoginDataUseCase(repository = get()) }
     factory { SaveTokenToLocalStorageUseCase(repository = get()) }
+    factory { GetUserDataUseCase(repository = get()) }
 
     viewModel {
         LoginFragmentViewModel(
@@ -37,7 +39,8 @@ val loginModule = module {
             validateEmailUseCase = get(),
             validatePasswordUseCase = get(),
             postLoginDataUseCase = get(),
-            saveTokenToLocalStorageUseCase = get()
+            saveTokenToLocalStorageUseCase = get(),
+            getUserDataUseCase = get()
         )
     }
 }
