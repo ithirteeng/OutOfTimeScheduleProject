@@ -67,6 +67,8 @@ class ScheduleFragment : Fragment() {
 
         onSwipeToRefreshPull()
 
+        setupClusterTextView()
+
         return binding.root
     }
 
@@ -117,6 +119,16 @@ class ScheduleFragment : Fragment() {
                 binding.navigationView.menu.findItem(R.id.login_button).isVisible = false
             }
 
+        }
+    }
+
+    private fun setupClusterTextView() {
+        if (clusterNumber != null) {
+            binding.clusterNumberTextView.text = clusterNumber
+        } else if (educatorId != null) {
+            binding.clusterNumberTextView.text = getString(R.string.educator)
+        } else if (lectureHallId != null) {
+            binding.clusterNumberTextView.text = getString(R.string.lecture_hall)
         }
     }
 
