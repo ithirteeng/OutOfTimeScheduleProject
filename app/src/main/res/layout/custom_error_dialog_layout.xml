@@ -20,12 +20,13 @@
 
     <TextView
         android:id="@+id/errorTextView"
+        style="@style/subtitle1_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/error_dialog_margin"
         android:layout_marginTop="@dimen/error_dialog_margin"
         android:layout_marginEnd="@dimen/error_dialog_margin"
-        android:text="@string/empty_error"
+        android:text="@string/undefined"
         app:layout_constraintBottom_toTopOf="@+id/errorImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
