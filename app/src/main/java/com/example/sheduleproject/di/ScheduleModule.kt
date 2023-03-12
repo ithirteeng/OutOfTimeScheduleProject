@@ -1,5 +1,6 @@
 package com.example.sheduleproject.di
 
+import com.example.sheduleproject.data.common.storage.TimeSlotStorage
 import com.example.sheduleproject.data.schedule.datasource.LocalScheduleDatasource
 import com.example.sheduleproject.data.schedule.datasource.LocalScheduleDatasourceImpl
 import com.example.sheduleproject.data.schedule.datasource.RemoteScheduleDatasource
@@ -22,7 +23,9 @@ val scheduleModule = module {
             tokenStorage = get()
         )
     }
-    single { ClassesStorage(context = get()) }
+
+    factory { TimeSlotStorage(context = get()) }
+    factory { ClassesStorage(context = get()) }
 
     factory<ScheduleRepository> {
         ScheduleRepositoryImpl(
@@ -47,11 +50,7 @@ val scheduleModule = module {
             getClassesListUseCase = get(),
             getClassInfoUseCase = get(),
             getClassesListByDateFromStorageUseCase = get(),
-            saveClassesListToLocalStorageUseCase = get(),
-            setUserAuthorizationFlagUseCase = get(),
-            checkTokenExistenceUseCase = get(),
-            removeTokenUseCase = get(),
-            logoutUseCase = get()
+            saveClassesListToLocalStorageUseCase = get()
         )
     }
 }
