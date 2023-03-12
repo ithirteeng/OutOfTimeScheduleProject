@@ -50,7 +50,11 @@ val scheduleModule = module {
             getClassesListUseCase = get(),
             getClassInfoUseCase = get(),
             getClassesListByDateFromStorageUseCase = get(),
-            saveClassesListToLocalStorageUseCase = get()
+            saveClassesListToLocalStorageUseCase = get(),
+            setUserAuthorizationFlagUseCase = get(),
+            checkTokenExistenceUseCase = get(),
+            removeTokenUseCase = get(),
+            logoutUseCase = get()
         )
     }
 }
