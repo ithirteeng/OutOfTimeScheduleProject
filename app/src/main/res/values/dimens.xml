@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="splash_logo_padding">100dp</dimen>
+
+    <dimen name="entrance_logo_margin">10dp</dimen>
+    <dimen name="h1_size">30sp</dimen>
+    <dimen name="subtitle1_size">16sp</dimen>
+    <dimen name="subtitle2_size">16sp</dimen>
+
+    <dimen name="edit_text_padding">18dp</dimen>
+    <dimen name="edit_text_margin">16dp</dimen>
+
+    <dimen name="border_padding">16dp</dimen>
+
+    <dimen name="or_text_view_margin">16dp</dimen>
+    <dimen name="error_text_size">14sp</dimen>
+
+    <dimen name="login_buttons_margin">16dp</dimen>
+    <dimen name="registration_buttons_margin">16dp</dimen>
+
+    <dimen name="schedule_screen_padding">16dp</dimen>
+    <dimen name="cluster_text_size">20sp</dimen>
+    <dimen name="full_date_text_size">20sp</dimen>
+    <dimen name="day_name_margin">10dp</dimen>
+    <dimen name="day_name_text_size">10sp</dimen>
+    <dimen name="day_number_size">13sp</dimen>
+    <dimen name="card_day_margin">3dp</dimen>
+    <dimen name="card_day_padding">10dp</dimen>
+    <dimen name="card_day_margin_top">16dp</dimen>
+
+    <dimen name="class_card_padding">16dp</dimen>
+    <dimen name="class_info_card_text_margin">12dp</dimen>
+    <dimen name="class_name_text_size">20sp</dimen>
+    <dimen name="class_card_margin">16dp</dimen>
+    <dimen name="class_lecture_hall_text_size">15sp</dimen>
+    <dimen name="class_educator_text_size">15sp</dimen>
+    <dimen name="class_card_text_margin">2dp</dimen>
+
+    <dimen name="error_dialog_margin">16dp</dimen>
+
+    <dimen name="schedule_choice_padding">16dp</dimen>
+</resources>

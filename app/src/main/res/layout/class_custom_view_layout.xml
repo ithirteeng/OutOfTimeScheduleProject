@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:paddingBottom="@dimen/class_card_margin">
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito_bold"
+        android:text="@string/default_class_time_text"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/class_lecture_hall_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/borderView"
+        android:layout_width="10dp"
+        android:layout_height="0dp"
+        android:background="@drawable/class_border_background"
+        app:layout_constraintBottom_toBottomOf="@+id/mainView"
+        app:layout_constraintEnd_toStartOf="@+id/mainView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timeTextView" />
+
+    <LinearLayout
+        android:id="@+id/mainView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/class_main_part_background"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:padding="@dimen/class_card_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/borderView"
+        app:layout_constraintTop_toBottomOf="@+id/timeTextView">
+
+        <TextView
+            android:id="@+id/classNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:text="@string/default_class_text"
+            android:textAllCaps="true"
+            android:textSize="@dimen/class_name_text_size" />
+
+        <TextView
+            android:id="@+id/lectureHallTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/class_card_text_margin"
+            android:fontFamily="@font/nunito"
+            android:text="@string/default_lecture_text"
+            android:textSize="@dimen/class_lecture_hall_text_size" />
+
+        <TextView
+            android:id="@+id/educatorNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito"
+            android:text="@string/default_educator_text"
+            android:textSize="@dimen/class_educator_text_size" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

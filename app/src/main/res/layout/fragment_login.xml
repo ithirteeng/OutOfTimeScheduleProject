@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.entrance.login.LoginFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/logoBottomGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/entrance_logo_margin"
+        android:contentDescription="@string/logo_tsu_description"
+        android:src="@drawable/tsu_logo"
+        app:layout_constraintBottom_toTopOf="@+id/logoBottomGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/loginTextView"
+        style="@style/h1_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_verb"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/logoBottomGuideline" />
+
+    <TextView
+        android:id="@+id/loginSubtitle"
+        style="@style/subtitle1_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="0dp"
+        android:text="@string/entrance_subtitle"
+        app:layout_constraintEnd_toStartOf="@+id/rightBorderGuideline"
+        app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/loginTextView"
+        tools:ignore="TextContrastCheck" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/rightBorderGuideline"
+        app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/loginSubtitle">
+
+        <EditText
+            android:id="@+id/emailEditText"
+            style="@style/edit_text_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/edit_text_margin"
+            android:ems="10"
+            android:hint="@string/email"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck,TextContrastCheck" />
+
+        <TextView
+            android:id="@+id/emailErrorTextView"
+            style="@style/error_text_field_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.sheduleproject.presentation.entrance.common.model.PasswordCustomView
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/passwordErrorTextView"
+            style="@style/error_text_field_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/leftBorderGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/border_padding" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rightBorderGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/border_padding" />
+
+    <View
+        android:id="@+id/leftOrLine"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/orTextView"
+        app:layout_constraintEnd_toStartOf="@+id/orTextView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
+        app:layout_constraintTop_toTopOf="@+id/orTextView" />
+
+    <TextView
+        android:id="@+id/orTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/or_text_view_margin"
+        android:text="@string/or"
+        app:layout_constraintEnd_toStartOf="@+id/rightOrLine"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/leftOrLine"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+    <View
+        android:id="@+id/rightOrLine"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        app:layout_constraintBottom_toBottomOf="@+id/orTextView"
+        app:layout_constraintEnd_toStartOf="@+id/rightBorderGuideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/orTextView"
+        app:layout_constraintTop_toTopOf="@+id/orTextView" />
+
+    <Button
+        android:id="@+id/loginButton"
+        style="@style/empty_buttons_style"
+        android:text="@string/login_verb"
+        app:layout_constraintEnd_toStartOf="@+id/rightBorderGuideline"
+        app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
+
+    <Button
+        android:id="@+id/registrationButton"
+        style="@style/empty_buttons_style"
+        android:text="@string/registration_verb"
+        app:layout_constraintBottom_toTopOf="@+id/withoutButton"
+        app:layout_constraintEnd_toStartOf="@+id/rightBorderGuideline"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/orTextView"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/withoutButton"
+        style="@style/subtitle1_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/login_buttons_margin"
+        android:layout_marginBottom="@dimen/login_buttons_margin"
+        android:background="@color/transparent"
+        android:text="@string/continue_without_registration"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rightBorderGuideline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/leftBorderGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/registrationButton"
+        tools:ignore="TextContrastCheck" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/progress_bar_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
