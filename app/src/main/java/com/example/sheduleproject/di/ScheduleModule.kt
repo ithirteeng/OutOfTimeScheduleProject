@@ -22,7 +22,7 @@ val scheduleModule = module {
             tokenStorage = get()
         )
     }
-    factory { ClassesStorage(context = get()) }
+    single { ClassesStorage(context = get()) }
 
     factory<ScheduleRepository> {
         ScheduleRepositoryImpl(
