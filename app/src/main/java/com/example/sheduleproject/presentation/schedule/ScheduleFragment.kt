@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.sheduleproject.R
+import com.example.sheduleproject.data.common.network.interceptor.NoConnectivityException
 import com.example.sheduleproject.databinding.FragmentScheduleBinding
 import com.example.sheduleproject.domain.schedule.utils.DateTimeHelper
 import com.example.sheduleproject.presentation.common.model.BundleHelper
@@ -49,6 +53,8 @@ class ScheduleFragment : Fragment() {
 
         binding.weekCustomView.refreshData()
 
+        setupDrawer()
+
         binding.progressBar.visibility = View.VISIBLE
 
         onGettingTimeslotsList()
@@ -60,6 +66,56 @@ class ScheduleFragment : Fragment() {
         onSwipeToRefreshPull()
 
         return binding.root
+    }
+
+    private fun setupDrawer() {
+        onMenuButtonClick()
+        onMenuItemClick()
+        onGettingUserTokenExistenceResult()
+    }
+
+    private fun onMenuButtonClick() {
+        binding.menuButton.setOnClickListener {
+            binding.drawer.openDrawer(GravityCompat.END)
+        }
+    }
+
+    private fun onMenuItemClick() {
+        binding.navigationView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.schedule_button -> {
+                    navigateToScheduleTypeChoiceFragment()
+                }
+                R.id.logout_button -> {
+                    viewModel.makeLogoutRequest { onErrorAppearance(it) }
+
+                    viewModel.getLogoutResultLiveData().observe(this.viewLifecycleOwner) {
+                        viewModel.removeTokenFromLocalStorage()
+                        viewModel.setUserAuthorizationFlag(false)
+
+                        navigateToLoginFragment()
+                    }
+                }
+                else -> {
+                    viewModel.setUserAuthorizationFlag(false)
+                    navigateToLoginFragment()
+                }
+            }
+            false
+        }
+    }
+
+    private fun onGettingUserTokenExistenceResult() {
+        viewModel.getTokenExistenceResultLiveData().observe(this.viewLifecycleOwner) {
+            if (!it) {
+                binding.navigationView.menu.findItem(R.id.logout_button).isVisible = false
+                binding.navigationView.menu.findItem(R.id.login_button).isVisible = true
+            } else {
+                binding.navigationView.menu.findItem(R.id.logout_button).isVisible = true
+                binding.navigationView.menu.findItem(R.id.login_button).isVisible = false
+            }
+
+        }
     }
 
     private fun setupOnWeekArrowsClickFunctions() {
@@ -88,11 +144,6 @@ class ScheduleFragment : Fragment() {
         }
     }
 
-    private fun onErrorAppearance() {
-        binding.progressBar.visibility = View.VISIBLE
-        binding.swipeToRefresh.isRefreshing = false
-    }
-
     private fun onGettingClassesList(
         startDate: String,
         endDate: String,
@@ -106,7 +157,7 @@ class ScheduleFragment : Fragment() {
             clusterNumber = clusterNumber,
             educatorId = educatorId,
             lectureHallId = lectureHallId,
-            onErrorAppeared = { onErrorAppearance() }
+            onErrorAppearance = { onErrorAppearance(it) }
         ).observe(this.viewLifecycleOwner) {
             viewModel.saveClassesListToLocalStorage(it)
             getClassesListByDateFromLocalStorage(binding.weekCustomView.getSelectedDate())
@@ -114,6 +165,25 @@ class ScheduleFragment : Fragment() {
 
             binding.progressBar.visibility = View.GONE
             binding.swipeToRefresh.isRefreshing = false
+        }
+    }
+
+    private fun onErrorAppearance(errorCode: Int) {
+        binding.progressBar.visibility = View.VISIBLE
+        binding.swipeToRefresh.isRefreshing = false
+
+        if (errorCode == NoConnectivityException.ERROR_CODE) {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.internet_connection_error),
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.internal_server_error),
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -160,6 +230,14 @@ class ScheduleFragment : Fragment() {
         viewModel.getTimeSlotListLiveData().observe(this.viewLifecycleOwner) {
             classesAdapter.setTimeSlotsList(it)
         }
+    }
+
+    private fun navigateToLoginFragment() {
+        findNavController().navigate(R.id.action_scheduleFragment_to_loginFragment)
+    }
+
+    private fun navigateToScheduleTypeChoiceFragment() {
+        findNavController().navigate(R.id.action_scheduleFragment_to_scheduleChoiceFragment)
     }
 
     private fun getFullDate(date: String): String {

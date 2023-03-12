@@ -1,8 +1,9 @@
 package com.example.sheduleproject.di
 
-import com.example.sheduleproject.data.common.storage.TimeSlotStorage
-import com.example.sheduleproject.data.schedule.datasource.ScheduleDatasource
-import com.example.sheduleproject.data.schedule.datasource.ScheduleDatasourceImpl
+import com.example.sheduleproject.data.schedule.datasource.LocalScheduleDatasource
+import com.example.sheduleproject.data.schedule.datasource.LocalScheduleDatasourceImpl
+import com.example.sheduleproject.data.schedule.datasource.RemoteScheduleDatasource
+import com.example.sheduleproject.data.schedule.datasource.RemoteScheduleDatasourceImpl
 import com.example.sheduleproject.data.schedule.repository.ScheduleRepositoryImpl
 import com.example.sheduleproject.data.schedule.storage.ClassesStorage
 import com.example.sheduleproject.domain.schedule.repository.ScheduleRepository
@@ -12,16 +13,21 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val scheduleModule = module {
-    factory<ScheduleDatasource> { ScheduleDatasourceImpl(scheduleApi = get()) }
-
-    factory { TimeSlotStorage(context = get()) }
-    factory { ClassesStorage(context = get()) }
+    factory<RemoteScheduleDatasource> { RemoteScheduleDatasourceImpl(scheduleApi = get()) }
+    factory<LocalScheduleDatasource> {
+        LocalScheduleDatasourceImpl(
+            timeSlotStorage = get(),
+            classesStorage = get(),
+            userStorage = get(),
+            tokenStorage = get()
+        )
+    }
+    single { ClassesStorage(context = get()) }
 
     factory<ScheduleRepository> {
         ScheduleRepositoryImpl(
-            timeSlotStorage = get(),
-            scheduleDatasource = get(),
-            classesStorage = get()
+            localDatasource = get(),
+            remoteDatasource = get()
         )
     }
     factory { GetTimeSlotListUseCase(repository = get()) }
@@ -29,6 +35,10 @@ val scheduleModule = module {
     factory { GetClassInfoUseCase(repository = get()) }
     factory { GetClassesListByDateFromStorageUseCase(repository = get()) }
     factory { SaveClassesListToLocalStorageUseCase(repository = get()) }
+    factory { SetUserAuthorizationFlagUseCase(repository = get()) }
+    factory { CheckTokenExistenceUseCase(repository = get()) }
+    factory { RemoveTokenUseCase(repository = get()) }
+    factory { LogoutUseCase(repository = get()) }
 
     viewModel {
         ScheduleFragmentViewModel(
@@ -37,7 +47,11 @@ val scheduleModule = module {
             getClassesListUseCase = get(),
             getClassInfoUseCase = get(),
             getClassesListByDateFromStorageUseCase = get(),
-            saveClassesListToLocalStorageUseCase = get()
+            saveClassesListToLocalStorageUseCase = get(),
+            setUserAuthorizationFlagUseCase = get(),
+            checkTokenExistenceUseCase = get(),
+            removeTokenUseCase = get(),
+            logoutUseCase = get()
         )
     }
 }

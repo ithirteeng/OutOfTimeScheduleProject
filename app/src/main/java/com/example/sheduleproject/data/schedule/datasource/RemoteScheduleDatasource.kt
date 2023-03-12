@@ -2,7 +2,7 @@ package com.example.sheduleproject.data.schedule.datasource
 
 import com.example.sheduleproject.data.schedule.model.ClassModel
 
-interface ScheduleDatasource {
+interface RemoteScheduleDatasource {
     suspend fun getClassesList(
         startDate: String?,
         endDate: String?,
@@ -14,4 +14,6 @@ interface ScheduleDatasource {
     ): List<ClassModel>
 
     suspend fun getClassInfo(classId: String): ClassModel
+
+    suspend fun logout()
 }

@@ -68,6 +68,9 @@
     <string name="schedule">Schedule</string>
     <string name="empty_string" />
 
+    <string name="logout">Log out</string>
+    <string name="choose_schedule">Schedule</string>
+
     <string name="entrance_subtitle">and see your incredible \n schedule</string>
 
     <string name="default_cluster_number">000000</string>
@@ -84,6 +87,7 @@
     <string name="login_400_error_message">Invalid credentials</string>
     <string name="undefined">undefined</string>
     <string name="internet_connection_error">There is no Internet connection</string>
+    <string name="internal_server_error">Internal server error</string>
     <string name="empty_class_list">There aren\'t classes today</string>
 
 

@@ -5,10 +5,12 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.sheduleproject.data.common.network.interceptor.NoConnectivityException
 import com.example.sheduleproject.domain.common.entity.TimeSlotEntity
 import com.example.sheduleproject.domain.schedule.entity.ClassEntity
 import com.example.sheduleproject.domain.schedule.usecase.*
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class ScheduleFragmentViewModel(
     application: Application,
@@ -16,7 +18,11 @@ class ScheduleFragmentViewModel(
     private val getClassesListUseCase: GetClassesListUseCase,
     private val getClassInfoUseCase: GetClassInfoUseCase,
     private val getClassesListByDateFromStorageUseCase: GetClassesListByDateFromStorageUseCase,
-    private val saveClassesListToLocalStorageUseCase: SaveClassesListToLocalStorageUseCase
+    private val saveClassesListToLocalStorageUseCase: SaveClassesListToLocalStorageUseCase,
+    private val checkTokenExistenceUseCase: CheckTokenExistenceUseCase,
+    private val logoutUseCase: LogoutUseCase,
+    private val removeTokenUseCase: RemoveTokenUseCase,
+    private val setUserAuthorizationFlagUseCase: SetUserAuthorizationFlagUseCase
 ) : AndroidViewModel(application) {
 
     fun getTimeSlotListLiveData(): MutableLiveData<List<TimeSlotEntity>> =
@@ -32,7 +38,7 @@ class ScheduleFragmentViewModel(
         educatorId: String?,
         dayOfWeek: String?,
         classType: String?,
-        onErrorAppeared: () -> Unit
+        onErrorAppearance: (errorCode: Int) -> Unit
     ) {
         viewModelScope.launch {
             getClassesListUseCase(
@@ -46,7 +52,11 @@ class ScheduleFragmentViewModel(
             ).onSuccess {
                 classesListLiveData.value = it
             }.onFailure {
-                onErrorAppeared()
+                if (it is HttpException) {
+                    onErrorAppearance(it.code())
+                } else if (it is NoConnectivityException) {
+                    onErrorAppearance(NoConnectivityException.ERROR_CODE)
+                }
                 Log.e("API_ERROR", "schedule_classes_list", it)
             }
         }
@@ -60,7 +70,7 @@ class ScheduleFragmentViewModel(
         lectureHallId: String? = null,
         dayOfWeek: String? = null,
         classType: String? = null,
-        onErrorAppeared: () -> Unit
+        onErrorAppearance: (errorCode: Int) -> Unit
     ): MutableLiveData<List<ClassEntity>> {
         getAndSetClassesList(
             startDate = startDate,
@@ -70,27 +80,35 @@ class ScheduleFragmentViewModel(
             lectureHallId = lectureHallId,
             dayOfWeek = dayOfWeek,
             classType = classType,
-            onErrorAppeared = onErrorAppeared
+            onErrorAppearance = onErrorAppearance
         )
         return classesListLiveData
     }
 
     private val classInfoLiveData = MutableLiveData<ClassEntity>()
 
-    private fun getClassInfo(classId: String) {
+    private fun getClassInfo(classId: String, onErrorAppearance: (errorCode: Int) -> Unit) {
         viewModelScope.launch {
             getClassInfoUseCase(classId)
                 .onSuccess {
                     classInfoLiveData.value = it
                 }
                 .onFailure {
+                    if (it is HttpException) {
+                        onErrorAppearance(it.code())
+                    } else if (it is NoConnectivityException) {
+                        onErrorAppearance(NoConnectivityException.ERROR_CODE)
+                    }
                     Log.e("API_ERROR", "schedule_class_info", it)
                 }
         }
     }
 
-    fun getClassesInfoLiveData(classId: String): MutableLiveData<ClassEntity> {
-        getClassInfo(classId)
+    fun getClassesInfoLiveData(
+        classId: String,
+        onErrorAppearance: (errorCode: Int) -> Unit
+    ): MutableLiveData<ClassEntity> {
+        getClassInfo(classId, onErrorAppearance)
         return classInfoLiveData
     }
 
@@ -101,5 +119,36 @@ class ScheduleFragmentViewModel(
     fun getClassesListByDateFromStorage(date: String): List<ClassEntity> =
         getClassesListByDateFromStorageUseCase(date)
 
+
+    fun getTokenExistenceResultLiveData(): MutableLiveData<Boolean> =
+        MutableLiveData(checkTokenExistenceUseCase())
+
+    fun setUserAuthorizationFlag(authorizationFlag: Boolean) =
+        setUserAuthorizationFlagUseCase(authorizationFlag)
+
+    fun removeTokenFromLocalStorage() =
+        removeTokenUseCase()
+
+
+    private val logoutResultsLiveData = MutableLiveData<Boolean>()
+
+    fun makeLogoutRequest(onErrorAppearance: (errorCode: Int) -> Unit) {
+        viewModelScope.launch {
+            logoutUseCase()
+                .onSuccess {
+                    logoutResultsLiveData.value = true
+                }
+                .onFailure {
+                    if (it is HttpException) {
+                        onErrorAppearance(it.code())
+                    } else if (it is NoConnectivityException) {
+                        onErrorAppearance(NoConnectivityException.ERROR_CODE)
+                    }
+                    Log.e("API_ERROR", "schedule_logout", it)
+                }
+        }
+    }
+
+    fun getLogoutResultLiveData(): MutableLiveData<Boolean> = logoutResultsLiveData
 
 }

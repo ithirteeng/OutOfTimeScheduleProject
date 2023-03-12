@@ -16,12 +16,12 @@ class ScheduleChoicesAdapter(
     private val onClick: (data: Any) -> Unit
 ) : RecyclerView.Adapter<ScheduleChoicesAdapter.ScheduleChoicesViewHolder>() {
 
-    class ScheduleChoicesViewHolder(view: View) : ViewHolder(view) {
+    inner class ScheduleChoicesViewHolder(view: View) : ViewHolder(view) {
         private val binding = ScheduleChoiceItemBinding.bind(view)
 
-        fun onItemClick(onClick: () -> Unit) {
+        init {
             binding.button.setOnClickListener {
-                onClick()
+                onClick(list[bindingAdapterPosition])
             }
         }
 
@@ -49,10 +49,8 @@ class ScheduleChoicesAdapter(
 
     private var list = arrayListOf<Any>()
 
-    @SuppressLint("NotifyDataSetChanged")
     fun setList(itemsList: List<Any>) {
         list = ArrayList(itemsList)
-        this.notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScheduleChoicesViewHolder {
@@ -65,7 +63,6 @@ class ScheduleChoicesAdapter(
     override fun onBindViewHolder(holder: ScheduleChoicesViewHolder, position: Int) {
         val itemData = list[position]
         holder.bindData(itemData)
-        holder.onItemClick { onClick(itemData) }
     }
 
     override fun getItemCount(): Int = list.size
