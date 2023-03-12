@@ -13,7 +13,5 @@ interface RemoteScheduleDatasource {
         classType: String?
     ): List<ClassModel>
 
-    suspend fun getClassInfo(classId: String): ClassModel
-
     suspend fun logout()
 }

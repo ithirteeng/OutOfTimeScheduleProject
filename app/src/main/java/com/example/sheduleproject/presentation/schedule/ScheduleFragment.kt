@@ -1,13 +1,15 @@
 package com.example.sheduleproject.presentation.schedule
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Toast
 import androidx.core.view.GravityCompat
-import android.widget.Toast
-import androidx.core.view.GravityCompat
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.sheduleproject.R
@@ -16,6 +18,7 @@ import com.example.sheduleproject.databinding.FragmentScheduleBinding
 import com.example.sheduleproject.domain.schedule.utils.DateTimeHelper
 import com.example.sheduleproject.presentation.common.model.BundleHelper
 import com.example.sheduleproject.presentation.schedule.adapter.ClassesAdapter
+import com.example.sheduleproject.presentation.schedule.dialog.ClassInfoDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScheduleFragment : Fragment() {
@@ -28,8 +31,13 @@ class ScheduleFragment : Fragment() {
 
     private val classesAdapter by lazy {
         ClassesAdapter {
-
+            dialogFragment.setClassEntity(it)
+            dialogFragment.show(parentFragmentManager, "class info dialog")
         }
+    }
+
+    private val dialogFragment by lazy {
+        ClassInfoDialogFragment()
     }
 
     private val clusterNumber by lazy {
@@ -55,6 +63,7 @@ class ScheduleFragment : Fragment() {
 
         binding.weekCustomView.refreshData()
 
+        setupDialogFragment()
         setupDrawer()
 
         binding.progressBar.visibility = View.VISIBLE
@@ -199,6 +208,12 @@ class ScheduleFragment : Fragment() {
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }
+
+    private fun setupDialogFragment() {
+        dialogFragment.dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialogFragment.dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialogFragment.setStyle(DialogFragment.STYLE_NO_FRAME, android.R.style.Theme)
     }
 
     private fun getClassesListByDateFromLocalStorage(date: String) {

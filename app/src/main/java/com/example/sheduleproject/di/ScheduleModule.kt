@@ -32,7 +32,6 @@ val scheduleModule = module {
     }
     factory { GetTimeSlotListUseCase(repository = get()) }
     factory { GetClassesListUseCase(repository = get()) }
-    factory { GetClassInfoUseCase(repository = get()) }
     factory { GetClassesListByDateFromStorageUseCase(repository = get()) }
     factory { SaveClassesListToLocalStorageUseCase(repository = get()) }
     factory { SetUserAuthorizationFlagUseCase(repository = get()) }
@@ -45,7 +44,6 @@ val scheduleModule = module {
             application = get(),
             getTimeSlotListUseCase = get(),
             getClassesListUseCase = get(),
-            getClassInfoUseCase = get(),
             getClassesListByDateFromStorageUseCase = get(),
             saveClassesListToLocalStorageUseCase = get(),
             setUserAuthorizationFlagUseCase = get(),

@@ -3,7 +3,6 @@ package com.example.sheduleproject.data.schedule.api
 import com.example.sheduleproject.data.schedule.model.ClassModel
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ScheduleApi {
@@ -17,9 +16,6 @@ interface ScheduleApi {
         @Query("dayOfWeek") dayOfWeek: String?,
         @Query("classType") classType: String?
     ): List<ClassModel>
-
-    @GET("api/class/{id}")
-    suspend fun getClassInfo(@Path("id") classId: String): ClassModel
 
     @POST("api/auth/logout")
     suspend fun logout()

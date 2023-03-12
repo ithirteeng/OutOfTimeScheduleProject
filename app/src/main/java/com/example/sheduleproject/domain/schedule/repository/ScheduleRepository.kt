@@ -17,8 +17,6 @@ interface ScheduleRepository {
 
     fun getClassesListByDate(date: String): List<ClassEntity>
 
-    suspend fun getClassInfo(classId: String): Result<ClassEntity>
-
     suspend fun logout(): Result<Boolean>
 
     suspend fun getClassesList(

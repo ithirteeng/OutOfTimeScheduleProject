@@ -8,15 +8,15 @@ import com.example.sheduleproject.domain.common.entity.TimeSlotEntity
 import com.example.sheduleproject.domain.schedule.entity.ClassEntity
 import com.example.sheduleproject.presentation.schedule.model.ClassCustomView
 
-class ClassesAdapter(private val onCardClick: () -> Unit) :
+class ClassesAdapter(private val onCardClick: (classEntity: ClassEntity) -> Unit) :
     RecyclerView.Adapter<ClassesAdapter.ClassesViewHolder>() {
 
     inner class ClassesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ClassCustomViewLayoutBinding.bind(view)
 
         init {
-            binding.root.setOnClickListener {
-                onCardClick()
+            binding.mainView.setOnClickListener {
+                onCardClick(classesList[bindingAdapterPosition])
             }
         }
 

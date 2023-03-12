@@ -78,6 +78,7 @@
     <string name="default_date_text">m. 1 january 1970</string>
     <string name="default_day_text">1</string>
     <string name="default_class_text">Undefined</string>
+    <string name="class_info">Class Information</string>
     <string name="default_educator_text">Educator Educatorovich Educatorov</string>
     <string name="default_lecture_text">214 (2) text</string>
 

@@ -25,10 +25,6 @@ class RemoteScheduleDatasourceImpl(
             classType = classType
         )
 
-
-    override suspend fun getClassInfo(classId: String): ClassModel =
-        scheduleApi.getClassInfo(classId = classId)
-
     override suspend fun logout() =
         scheduleApi.logout()
 

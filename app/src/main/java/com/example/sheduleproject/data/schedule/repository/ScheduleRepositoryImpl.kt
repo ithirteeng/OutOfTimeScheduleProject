@@ -3,7 +3,6 @@ package com.example.sheduleproject.data.schedule.repository
 import com.example.sheduleproject.data.schedule.datasource.LocalScheduleDatasource
 import com.example.sheduleproject.data.schedule.datasource.RemoteScheduleDatasource
 import com.example.sheduleproject.data.schedule.mapper.toEntitiesList
-import com.example.sheduleproject.data.schedule.mapper.toEntity
 import com.example.sheduleproject.data.schedule.mapper.toModelsList
 import com.example.sheduleproject.domain.common.entity.TimeSlotEntity
 import com.example.sheduleproject.domain.schedule.entity.ClassEntity
@@ -55,14 +54,6 @@ class ScheduleRepositoryImpl(
                     classType = classType
                 ).toEntitiesList()
             )
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
-
-    override suspend fun getClassInfo(classId: String): Result<ClassEntity> {
-        return try {
-            Result.success(remoteDatasource.getClassInfo(classId = classId).toEntity())
         } catch (e: Exception) {
             Result.failure(e)
         }

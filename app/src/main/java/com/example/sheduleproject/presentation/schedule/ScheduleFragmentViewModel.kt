@@ -16,7 +16,6 @@ class ScheduleFragmentViewModel(
     application: Application,
     private val getTimeSlotListUseCase: GetTimeSlotListUseCase,
     private val getClassesListUseCase: GetClassesListUseCase,
-    private val getClassInfoUseCase: GetClassInfoUseCase,
     private val getClassesListByDateFromStorageUseCase: GetClassesListByDateFromStorageUseCase,
     private val saveClassesListToLocalStorageUseCase: SaveClassesListToLocalStorageUseCase,
     private val checkTokenExistenceUseCase: CheckTokenExistenceUseCase,
@@ -83,33 +82,6 @@ class ScheduleFragmentViewModel(
             onErrorAppearance = onErrorAppearance
         )
         return classesListLiveData
-    }
-
-    private val classInfoLiveData = MutableLiveData<ClassEntity>()
-
-    private fun getClassInfo(classId: String, onErrorAppearance: (errorCode: Int) -> Unit) {
-        viewModelScope.launch {
-            getClassInfoUseCase(classId)
-                .onSuccess {
-                    classInfoLiveData.value = it
-                }
-                .onFailure {
-                    if (it is HttpException) {
-                        onErrorAppearance(it.code())
-                    } else if (it is NoConnectivityException) {
-                        onErrorAppearance(NoConnectivityException.ERROR_CODE)
-                    }
-                    Log.e("API_ERROR", "schedule_class_info", it)
-                }
-        }
-    }
-
-    fun getClassesInfoLiveData(
-        classId: String,
-        onErrorAppearance: (errorCode: Int) -> Unit
-    ): MutableLiveData<ClassEntity> {
-        getClassInfo(classId, onErrorAppearance)
-        return classInfoLiveData
     }
 
     fun saveClassesListToLocalStorage(classesList: List<ClassEntity>) =
