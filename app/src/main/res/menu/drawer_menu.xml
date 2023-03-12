@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/schedule_button"
+            android:icon="@drawable/icon_school"
+            android:title="@string/choose_schedule" />
+
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/login_button"
+            android:icon="@drawable/icon_login"
+            android:title="@string/login_verb"
+            android:visible="false" />
+
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/logout_button"
+            android:icon="@drawable/icon_logout"
+            android:title="@string/logout" />
+    </group>
+</menu>

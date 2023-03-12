@@ -5,6 +5,12 @@ import com.example.sheduleproject.domain.schedule.entity.ClassEntity
 
 interface ScheduleRepository {
 
+    fun checkTokenExistence(): Boolean
+
+    fun removeToken()
+
+    fun setUserAuthorizationFlag(authorizationFlag: Boolean)
+
     fun getTimeSlotListFromStorage(): List<TimeSlotEntity>
 
     fun saveClassesListToLocalStorage(classesList: List<ClassEntity>)
@@ -12,6 +18,8 @@ interface ScheduleRepository {
     fun getClassesListByDate(date: String): List<ClassEntity>
 
     suspend fun getClassInfo(classId: String): Result<ClassEntity>
+
+    suspend fun logout(): Result<Boolean>
 
     suspend fun getClassesList(
         startDate: String?,

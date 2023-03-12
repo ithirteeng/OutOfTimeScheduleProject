@@ -23,7 +23,7 @@ class TimeSlotStorage(context: Context) {
             .apply()
     }
 
-    fun getTimeSLotListFromLocalStorage(): List<TimeSlotModel> {
+    fun getTimeSlotListFromLocalStorage(): List<TimeSlotModel> {
         val json = sharedPreferences.getString(TIMESLOT_KEY, null)
         val type: Type = object : TypeToken<List<TimeSlotModel>>() {}.type
         return Gson().fromJson(json, type)

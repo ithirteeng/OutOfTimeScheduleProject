@@ -34,10 +34,23 @@ class ClassCustomView @JvmOverloads constructor(
         with(binding) {
             timeTextView.text = setCorrectTimePeriod(timeSlotEntity)
             classNameTextView.text = makeSubjectStringCorrect(classEntity.subject?.name)
-            lectureHallTextView.text = makeStringCorrect(classEntity.lectureHall?.name)
+            lectureHallTextView.text = setupLectureHallData(classEntity)
             educatorNameTextView.text = makeStringCorrect(setupEducatorName(classEntity.educator))
             changeCardStyle(classType)
         }
+    }
+
+    private fun setupLectureHallData(classEntity: ClassEntity): String {
+        val building = makeStringCorrect(classEntity.lectureHall?.hostBuilding?.name)
+        val lectureHall = makeStringCorrect(classEntity.lectureHall?.name)
+
+        val result = if (building.isEmpty()) {
+            lectureHall
+        } else {
+            "$building: $lectureHall"
+        }
+
+        return result
     }
 
     private fun setCorrectTimePeriod(timeSlotEntity: TimeSlotEntity): String {

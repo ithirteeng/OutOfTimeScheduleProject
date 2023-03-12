@@ -18,7 +18,8 @@ val loginModule = module {
     single { EmailValidator() }
     single { PasswordValidator() }
 
-    factory { UserStorage(context = get()) }
+    single { UserStorage(context = get()) }
+
     factory<RemoteLoginDatasource> { RemoteLoginDatasourceImpl(loginApi = get()) }
     factory<LocalLoginDatasource> {
         LocalLoginDatasourceImpl(

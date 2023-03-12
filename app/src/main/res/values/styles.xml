@@ -84,4 +84,11 @@
     <style name="ProgressDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:windowBackground">@color/transparent</item>
     </style>
+
+    <style name="NavDrawerTextStyle" parent="Base.TextAppearance.AppCompat">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/nunito</item>
+        <item name="android:textSize">@dimen/subtitle1_size</item>
+
+    </style>
 </resources>

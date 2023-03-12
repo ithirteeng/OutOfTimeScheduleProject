@@ -13,7 +13,7 @@ import com.example.sheduleproject.domain.token.usecase.SaveTokenToLocalStorageUs
 import org.koin.dsl.module
 
 val tokenModule = module {
-    factory { TokenStorage(context = get()) }
+    single { TokenStorage(context = get()) }
     factory<LocalTokenDatasource> { LocalTokenDatasourceImpl(storage = get()) }
     factory<RemoteTokenDatasource> { RemoteTokenDatasourceImpl(api = get()) }
 

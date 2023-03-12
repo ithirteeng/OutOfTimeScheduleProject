@@ -22,7 +22,7 @@ val splashModule = module {
             timeSlotStorage = get()
         )
     }
-    factory { TimeSlotStorage(context = get()) }
+    single { TimeSlotStorage(context = get()) }
 
     factory<SplashRepository> {
         SplashRepositoryImpl(

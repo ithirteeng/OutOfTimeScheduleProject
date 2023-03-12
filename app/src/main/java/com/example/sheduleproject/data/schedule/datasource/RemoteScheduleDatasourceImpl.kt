@@ -3,9 +3,9 @@ package com.example.sheduleproject.data.schedule.datasource
 import com.example.sheduleproject.data.schedule.api.ScheduleApi
 import com.example.sheduleproject.data.schedule.model.ClassModel
 
-class ScheduleDatasourceImpl(
+class RemoteScheduleDatasourceImpl(
     private val scheduleApi: ScheduleApi
-) : ScheduleDatasource {
+) : RemoteScheduleDatasource {
     override suspend fun getClassesList(
         startDate: String?,
         endDate: String?,
@@ -28,5 +28,8 @@ class ScheduleDatasourceImpl(
 
     override suspend fun getClassInfo(classId: String): ClassModel =
         scheduleApi.getClassInfo(classId = classId)
+
+    override suspend fun logout() =
+        scheduleApi.logout()
 
 }
