@@ -11,11 +11,13 @@ import com.example.sheduleproject.presentation.schedule.model.ClassCustomView
 class ClassesAdapter(private val onCardClick: () -> Unit) :
     RecyclerView.Adapter<ClassesAdapter.ClassesViewHolder>() {
 
-    class ClassesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ClassesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = ClassCustomViewLayoutBinding.bind(view)
 
-        fun onCardClick(onCardClick: () -> Unit) = binding.root.setOnClickListener {
-            onCardClick()
+        init {
+            binding.root.setOnClickListener {
+                onCardClick()
+            }
         }
 
         fun setupData(classEntity: ClassEntity, timeSlotEntity: TimeSlotEntity) {
@@ -40,11 +42,6 @@ class ClassesAdapter(private val onCardClick: () -> Unit) :
         val classEntity = classesList[position]
         val timeSlotEntity = timeSlotsList[classEntity.timeSlotNumber - 1]
         holder.setupData(classEntity, timeSlotEntity)
-
-        holder.onCardClick {
-            onCardClick()
-        }
-
     }
 
     private fun sortClassesList() {
