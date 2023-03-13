@@ -4,8 +4,8 @@ import com.example.sheduleproject.domain.entrance.utils.ValidationResult
 
 class PatronymicValidator : Validator {
 
-    private val correctRegex = Regex("[A-Z][a-z]+")
-    private val incorrectRegex = Regex("[^A-Za-z]")
+    private val correctRegex = Regex("[A-ZА-Я][a-zа-я]+")
+    private val incorrectRegex = Regex("[^A-ZА-Яa-zа-я]")
 
     override fun validate(string: String): ValidationResult {
         return if (string.isEmpty()) {

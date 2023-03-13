@@ -12,10 +12,10 @@
         android:id="@+id/classInfoTextView"
         style="@style/h1_style"
         android:layout_width="wrap_content"
-        android:textColor="@color/black_medium"
-        android:fontFamily="@font/nunito"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/nunito"
         android:text="@string/class_info"
+        android:textColor="@color/black_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,14 +25,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/class_info"
-        app:tint="@color/black_medium"
         android:padding="@dimen/class_card_text_margin"
         app:layout_constraintEnd_toStartOf="@+id/classNameTextView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/classInfoTextView"
-        app:srcCompat="@drawable/icon_book" />
+        app:srcCompat="@drawable/icon_book"
+        app:tint="@color/black_medium" />
 
     <TextView
         android:id="@+id/classNameTextView"
@@ -58,11 +58,11 @@
         android:padding="@dimen/class_card_text_margin"
         app:layout_constraintEnd_toStartOf="@+id/locationTextView"
         app:layout_constraintHorizontal_bias="0.5"
-        app:tint="@color/black_medium"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/classNameTextView"
-        app:srcCompat="@drawable/building_icon" />
+        app:srcCompat="@drawable/building_icon"
+        app:tint="@color/black_medium" />
 
     <TextView
         android:id="@+id/locationTextView"
@@ -86,13 +86,13 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/educator"
         android:padding="@dimen/class_card_text_margin"
-        app:tint="@color/black_medium"
         app:layout_constraintEnd_toStartOf="@+id/educatorTextView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/locationTextView"
-        app:srcCompat="@drawable/educator_icon" />
+        app:srcCompat="@drawable/educator_icon"
+        app:tint="@color/black_medium" />
 
     <TextView
         android:id="@+id/educatorTextView"
@@ -115,14 +115,13 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/class_info"
         android:padding="@dimen/class_card_text_margin"
-        app:tint="@color/black_medium"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/classTypeTextView"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/educatorTextView"
-        app:srcCompat="@drawable/class_type_icon" />
+        app:srcCompat="@drawable/class_type_icon"
+        app:tint="@color/black_medium" />
 
     <TextView
         android:id="@+id/classTypeTextView"
@@ -138,4 +137,34 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/classTypeIcon"
         app:layout_constraintTop_toBottomOf="@+id/educatorTextView" />
+
+    <ImageView
+        android:id="@+id/clusterIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/class_info"
+        android:padding="@dimen/class_card_text_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/clusterTextView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/classTypeTextView"
+        app:srcCompat="@drawable/cluster_icon"
+        app:tint="@color/black_medium" />
+
+    <TextView
+        android:id="@+id/clusterTextView"
+        style="@style/subtitle1_style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/class_info_card_text_margin"
+        android:padding="@dimen/class_card_text_margin"
+        android:text="@string/undefined"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toBottomOf="@+id/clusterIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/clusterIcon"
+        app:layout_constraintTop_toBottomOf="@+id/classTypeTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
