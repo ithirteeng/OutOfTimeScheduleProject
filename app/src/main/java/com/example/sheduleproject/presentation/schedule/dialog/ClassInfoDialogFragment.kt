@@ -25,6 +25,7 @@ class ClassInfoDialogFragment(
         binding.educatorTextView.text = makeStringCorrect(setupEducatorName(classEntity?.educator))
         binding.classTypeTextView.text = makeStringCorrect(classEntity?.classTypeName)
         binding.locationTextView.text = setupLectureHallData(classEntity!!)
+        binding.clusterTextView.text = makeStringCorrect(classEntity?.clusterNumber)
 
         val builder = AlertDialog.Builder(requireActivity(), R.style.ProgressDialogTheme)
         return builder.setView(view).create()
@@ -48,12 +49,14 @@ class ClassInfoDialogFragment(
     }
 
     private fun setupEducatorName(educatorEntity: EducatorEntity?): String {
-        return makeStringCorrect(educatorEntity?.middleName) +
+        return makeStringCorrect(educatorEntity?.lastName) +
                 " ${makeStringCorrect(educatorEntity?.firstName)}" +
-                " ${makeStringCorrect(educatorEntity?.lastName)}"
+                " ${makeStringCorrect(educatorEntity?.middleName)}"
     }
 
-    private fun makeStringCorrect(string: String?): String = string ?: ""
+    private fun makeStringCorrect(string: String?): String {
+        return string?.trim() ?: ""
+    }
 
     private fun makeSubjectStringCorrect(string: String?): String {
         return if (string == null || string.isEmpty()) {
