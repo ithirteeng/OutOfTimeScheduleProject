@@ -69,12 +69,14 @@ class ClassCustomView @JvmOverloads constructor(
     }
 
     private fun setupEducatorName(educatorEntity: EducatorEntity?): String {
-        return makeStringCorrect(educatorEntity?.middleName) +
+        return makeStringCorrect(educatorEntity?.lastName) +
                 " ${makeStringCorrect(educatorEntity?.firstName)}" +
-                " ${makeStringCorrect(educatorEntity?.lastName)}"
+                " ${makeStringCorrect(educatorEntity?.middleName)}"
     }
 
-    private fun makeStringCorrect(string: String?): String = string ?: ""
+    private fun makeStringCorrect(string: String?): String {
+        return string?.trim() ?: ""
+    }
 
     private fun makeSubjectStringCorrect(string: String?): String {
         return if (string == null || string.isEmpty()) {
