@@ -1,4 +1,4 @@
-# MovieCatalogProject
+# OutOfTimeProject
 *HITS project*<br/>
 
 Application with ability of watching schedule<br/>
